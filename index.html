@@ -5,61 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TAXBuddy AI – วางแผนภาษีง่ายๆ สไตล์ลูกหลาน</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--ink:#12203f;--mut:#5d6985;--line:#e2e7f2;--acc:#0b8f6a;--accbg:#e1f5ee;--warn:#b7770a;--warnbg:#fdf1d8;--bad:#c23b3b;--badbg:#fbe4e4;--pri:#243b8f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1426;--card:#151f38;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0}}
-:root[data-theme="dark"]{--bg:#0d1426;--card:#151f38;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{--bg:#f3f5fb;--card:#fff;--ink:#12203f;--mut:#5d6985;--line:#e2e7f2;--acc:#0b8f6a;--accbg:#e1f5ee;--warn:#b7770a;--warnbg:#fdf1d8;--bad:#c23b3b;--badbg:#fbe4e4;--pri:#243b8f;--g1:rgba(36,59,143,.13);--g2:rgba(11,143,106,.11);--sh:0 1px 2px rgba(18,32,63,.05),0 18px 36px -20px rgba(18,32,63,.22);--ease:cubic-bezier(.2,.8,.2,1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1122;--card:#141e37;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0;--g1:rgba(111,137,240,.18);--g2:rgba(62,211,162,.10);--sh:0 18px 36px -20px rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{--bg:#0b1122;--card:#141e37;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0;--g1:rgba(111,137,240,.18);--g2:rgba(62,211,162,.10);--sh:0 18px 36px -20px rgba(0,0,0,.6)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 "IBM Plex Sans Thai",system-ui,sans-serif}
+body{margin:0;min-height:100vh;background:radial-gradient(800px 420px at 90% -8%,var(--g1),transparent 70%),radial-gradient(700px 400px at -10% 12%,var(--g2),transparent 70%),var(--bg);background-attachment:fixed;color:var(--ink);font:400 16px/1.65 "IBM Plex Sans Thai",system-ui,sans-serif;transition:background-color .4s,color .4s}
 .wrap{max-width:1080px;margin:0 auto;padding:16px}
-header{display:flex;align-items:center;gap:12px;padding:8px 0 16px}
-.logo{width:40px;height:40px;border-radius:12px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:700}
-header h1{font-size:20px;margin:0;line-height:1.2}header p{margin:0;color:var(--mut);font-size:13px}
-nav{display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
-nav button{flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);font-weight:500;font-size:14px;font-family:inherit;padding:10px 14px;border-radius:10px;cursor:pointer;min-height:44px}
-nav button[aria-selected=true]{background:var(--pri);color:#fff}
+header{display:flex;align-items:center;gap:12px;padding:8px 0 18px}
+.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--pri),#4f6bdc 60%,#2bb39a);color:#fff;display:grid;place-items:center;font:700 16px Sora,sans-serif;box-shadow:0 8px 20px -8px var(--pri);animation:logo .9s var(--ease) both}
+header h1{font-size:21px;margin:0;line-height:1.2;letter-spacing:-.01em}header p{margin:0;color:var(--mut);font-size:13px}
+.th{margin-left:auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:18px;transition:transform .35s var(--ease),background .2s}
+.th:hover{transform:rotate(25deg)}.th:active{transform:scale(.9)}
+nav{position:relative;display:flex;gap:4px;overflow-x:auto;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:18px;box-shadow:var(--sh);scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.ind{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:12px;background:var(--pri);box-shadow:0 8px 18px -8px var(--pri);transition:transform .45s var(--ease),width .45s var(--ease)}
+nav button{position:relative;z-index:1;flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);font-weight:500;font-size:14px;font-family:inherit;padding:10px 14px;border-radius:12px;cursor:pointer;min-height:44px;transition:color .25s}
+nav button:hover{color:var(--ink)}nav button[aria-selected=true]{color:#fff}
 :focus-visible{outline:3px solid var(--pri);outline-offset:2px}
 .grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:900px){.grid.two{grid-template-columns:1.1fr .9fr}.sticky{position:sticky;top:12px;align-self:start}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
-h2{font-size:18px;margin:0 0 4px}h3{font-size:15px;margin:18px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--sh)}
+.card.res{background:linear-gradient(160deg,#1b2f78,#0d1840 75%);border-color:transparent;--ink:#f1f4ff;--mut:#a9b6dc;--line:rgba(255,255,255,.15);--acc:#5eeac0;--accbg:rgba(94,234,192,.16);--warn:#ffd27a;--warnbg:rgba(255,210,122,.16);color:var(--ink);position:relative;overflow:hidden}
+.card.res::before{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(circle,rgba(94,234,192,.35),transparent 65%);pointer-events:none;animation:drift 8s ease-in-out infinite alternate}
+.card.res>*{position:relative}
+h2{font-size:18px;margin:0 0 4px}h3{font-size:15px;margin:20px 0 8px}
 .sub{color:var(--mut);font-size:14px;margin:0 0 14px}
 label{display:block;font-size:14px;font-weight:500;margin:10px 0 4px}
-input,select{width:100%;min-height:46px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input,select{width:100%;min-height:48px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;transition:border-color .2s,box-shadow .2s,background .2s}
+input:hover,select:hover{border-color:var(--mut)}
+input:focus,select:focus{outline:0;border-color:var(--pri);box-shadow:0 0 0 4px var(--g1)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .inc{display:grid;grid-template-columns:1.2fr 1fr 44px;gap:8px;margin-bottom:8px}
-.btn{min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;font-size:14px;font-family:inherit;padding:0 16px;cursor:pointer}
+.inc.pop{animation:pop .45s var(--ease)}
+.btn{min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;font-size:14px;font-family:inherit;padding:0 16px;cursor:pointer;transition:transform .15s var(--ease),box-shadow .2s,border-color .2s}
+.btn:hover{border-color:var(--pri);box-shadow:0 6px 16px -10px var(--pri)}.btn:active{transform:scale(.96)}.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
 .btn.p{background:var(--pri);border-color:var(--pri);color:#fff}
 .hint{font-size:12.5px;color:var(--mut);margin:4px 0 0}
-.big{font-size:44px;font-weight:700;line-height:1.15;margin:4px 0}
-.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:500}
+.big{font:700 clamp(40px,8vw,58px)/1.1 Sora,"IBM Plex Sans Thai",sans-serif;letter-spacing:-.02em;margin:6px 0;font-variant-numeric:tabular-nums;transition:color .4s}
+.pill{display:inline-block;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:500;transition:background .3s,color .3s}
 .ok{background:var(--accbg);color:var(--acc)}.wn{background:var(--warnbg);color:var(--warn)}.bd{background:var(--badbg);color:var(--bad)}
-.bar{display:flex;height:22px;border-radius:8px;overflow:hidden;background:var(--line);margin:10px 0}
-.bar i{display:block;height:100%}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--mut);font-weight:500}
-.kv{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.kv b{font-weight:600}
-.meter{height:12px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;border-radius:8px}
-.save{background:var(--accbg);color:var(--acc);border-radius:14px;padding:16px;margin-top:12px}
-.save b{font-size:26px}
-.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px}
-.m{max-width:88%;padding:10px 14px;border-radius:14px;font-size:15px}
-.m.u{align-self:flex-end;background:var(--pri);color:#fff}.m.b{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:8px 14px;font:inherit;font-size:13.5px;cursor:pointer;min-height:40px}
+.bar{display:flex;height:24px;border-radius:10px;overflow:hidden;background:var(--line);margin:10px 0;gap:2px}
+.bar i{display:block;height:100%;transition:width .5s var(--ease)}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--mut);font-weight:500}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px;font-variant-numeric:tabular-nums}.kv b{font-weight:600}
+.meter{height:12px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;border-radius:8px;transition:width .6s var(--ease),background .3s}
+.save{background:linear-gradient(135deg,var(--accbg),transparent 140%);color:var(--acc);border:1px solid var(--accbg);border-radius:18px;padding:18px;margin-top:14px;line-height:1.5}
+.save b{font:700 28px Sora,"IBM Plex Sans Thai",sans-serif;letter-spacing:-.01em}
+.chat{height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px;scroll-behavior:smooth}
+.m{white-space:pre-wrap;max-width:88%;padding:10px 14px;border-radius:18px;font-size:15px;animation:pop .35s var(--ease)}
+.m.u{align-self:flex-end;background:var(--pri);color:#fff;border-bottom-right-radius:6px}.m.b{align-self:flex-start;background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:6px}
+.m.typing{min-width:64px;min-height:42px}.m.typing::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mut);box-shadow:14px 0 var(--mut),28px 0 var(--mut);animation:dots 1.1s infinite}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:8px 14px;font:inherit;font-size:13.5px;cursor:pointer;min-height:40px;transition:transform .2s var(--ease),border-color .2s,background .2s}
+.chips button:hover{transform:translateY(-2px);border-color:var(--pri);background:var(--card)}.chips button:active{transform:scale(.96)}
 .chatrow{display:flex;gap:8px}.chatrow input{flex:1}
-.disc{font-size:12.5px;color:var(--mut);text-align:center;padding:20px 8px}
+.disc{font-size:12.5px;color:var(--mut);text-align:center;padding:24px 8px}
 [hidden]{display:none!important}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes logo{from{opacity:0;transform:scale(.6) rotate(-12deg)}to{opacity:1;transform:none}}
+@keyframes dots{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes drift{to{transform:translate(-30px,24px) scale(1.15)}}
+.enter .card{animation:rise .6s var(--ease) both}.enter .card:nth-child(2){animation-delay:.09s}
+.enter .bar i,.enter .meter i{transform-origin:left;animation:grow .9s var(--ease) .25s both}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><div class="logo" aria-hidden="true">TB</div><div><h1>TAXBuddy AI</h1><p>ภาษีเงินได้บุคคลธรรมดา · อัตราขั้นบันได 0–35%</p></div></header>
-<nav role="tablist" aria-label="เมนูหลัก">
+<header><div class="logo" aria-hidden="true">TB</div><div><h1>TAXBuddy AI</h1><p>ภาษีเงินได้บุคคลธรรมดา · อัตราขั้นบันได 0–35%</p></div><button class="th" id="th" type="button" aria-label="สลับโหมดมืด/สว่าง">◐</button></header>
+<nav role="tablist" aria-label="เมนูหลัก"><span class="ind" id="ind" aria-hidden="true"></span>
 <button role="tab" aria-selected="true" data-t="calc">คำนวณภาษี</button>
 <button role="tab" aria-selected="false" data-t="opt">วางแผนลดหย่อน</button>
 <button role="tab" aria-selected="false" data-t="risk-s">เฝ้าระวังความเสี่ยง</button>
-<button role="tab" aria-selected="false" data-t="ai">ถามผู้ช่วย</button>
+<button role="tab" aria-selected="false" data-t="ai">ถามผู้ช่วย AI</button>
 </nav>
 
 <section id="calc"><div class="grid two">
@@ -69,17 +91,17 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;b
 <button class="btn" id="addInc" type="button">+ เพิ่มรายได้</button>
 <label for="wh">ภาษีที่ถูกหัก ณ ที่จ่ายแล้ว (บาท)</label>
 <input id="wh" type="number" inputmode="numeric" min="0" placeholder="ดูได้จากใบ 50 ทวิ">
-<p class="hint">รวมยอดจากทุกใบ 50 ทวิ ระบบจะนำไปหักจากภาษีที่ต้องจ่าย</p>
+<p class="hint">รวมยอดจากทุกใบ 50 ทวิ ระบบจะนำไปหักจากภาษีที่ต้องจ่าย</p><div style="margin-top:12px"><button class="btn" id="scanBtn" type="button">📷 ให้ AI อ่านเอกสาร (50 ทวิ / ใบเบี้ยประกัน / ใบซื้อกองทุน)</button><input id="scanFile" type="file" accept="image/*" hidden><div id="scanOut" class="hint" aria-live="polite"></div></div>
 <h3>ค่าลดหย่อนพื้นฐาน</h3>
 <div class="row">
 <div><label for="sp">คู่สมรสไม่มีรายได้</label><select id="sp"><option value="0">ไม่มี</option><option value="1">มี (60,000)</option></select></div>
-<div><label for="kid">บุตร (คนละ 30,000)</label><input id="kid" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="kid">บุตรคนแรก/เกิดก่อนปี 2561 (คนละ 30,000)</label><input id="kid" type="number" inputmode="numeric" min="0" value="0"></div><div><label for="kid2">บุตรคนที่ 2 ขึ้นไป เกิดตั้งแต่ปี 2561 (คนละ 60,000)</label><input id="kid2" type="number" inputmode="numeric" min="0" value="0"></div>
 <div><label for="par">บิดามารดา (คนละ 30,000)</label><input id="par" type="number" inputmode="numeric" min="0" max="4" value="0"></div>
-<div><label for="sso">ประกันสังคม (สูงสุด 9,000)</label><input id="sso" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="sso">ประกันสังคม (สูงสุด 9,000)</label><input id="sso" type="number" inputmode="numeric" min="0" value="0"></div><div><label for="phl">ประกันสุขภาพบิดามารดา (สูงสุด 15,000)</label><input id="phl" type="number" inputmode="numeric" min="0" value="0"></div><div><label for="pvd">กองทุนสำรองเลี้ยงชีพ (บาทต่อปี)</label><input id="pvd" type="number" inputmode="numeric" min="0" value="0"></div>
 </div>
 <p class="hint">ค่าลดหย่อนส่วนตัว 60,000 บาท หักให้อัตโนมัติ · กองทุน/ประกันเพิ่มเติม ใส่ในแท็บ “วางแผนลดหย่อน”</p>
 </div>
-<div class="card sticky" aria-live="polite">
+<div class="card res sticky" aria-live="polite">
 <h2 id="rLabel">ภาษีที่ต้องจ่าย</h2>
 <div class="big" id="rBig">0 บาท</div>
 <span class="pill ok" id="rPill">ใส่รายได้เพื่อเริ่มคำนวณ</span>
@@ -130,19 +152,20 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;b
 </div></section>
 
 <section id="ai" hidden><div class="card" style="max-width:720px;margin:auto">
-<h2>ผู้ช่วยภาษี</h2><p class="sub">ถามเรื่องภาษีได้เลย ตอบจากกฎที่ใช้ในแอป และใช้ตัวเลขของคุณถ้ากรอกไว้แล้ว</p>
+<h2>ผู้ช่วยภาษี</h2><p class="sub">ถามเรื่องภาษีได้เลย AI ตอบโดยอ้างอิงตัวเลขที่คุณกรอกไว้ในแอป</p>
 <div class="chat" id="chat" role="log"></div>
 <div class="chips" id="chips"></div>
 <form class="chatrow" id="cf"><input id="ci" aria-label="พิมพ์คำถาม" placeholder="เช่น ต้องยื่นภาษีไหม" autocomplete="off"><button class="btn p" type="submit">ส่ง</button></form>
 </div></section>
 
-<p class="disc">เครื่องมือนี้ให้ข้อมูลประกอบการตัดสินใจเท่านั้น ไม่ใช่คำปรึกษาทางภาษี · ตัวเลขคำนวณในเครื่องของคุณ ไม่มีการส่งข้อมูลออก · ตรวจสอบเงื่อนไขล่าสุดกับกรมสรรพากรก่อนยื่นจริง</p>
+<p class="disc">เครื่องมือนี้ให้ข้อมูลประกอบการตัดสินใจเท่านั้น ไม่ใช่คำปรึกษาทางภาษี · การคำนวณทำในเครื่องของคุณ แต่เมื่อใช้ผู้ช่วย AI หรือสแกนเอกสาร ข้อความ/รูปและตัวเลขสรุปของคุณจะถูกส่งไปประมวลผลที่ Claude · ตรวจสอบเงื่อนไขล่าสุดกับกรมสรรพากรก่อนยื่นจริง</p>
 </div>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const f=n=>Math.round(n).toLocaleString('th-TH');
 const num=id=>Math.max(0,parseFloat($(id).value)||0);
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const BR=[[150000,0],[300000,.05],[500000,.10],[750000,.15],[1000000,.20],[2000000,.25],[5000000,.30],[Infinity,.35]];
 const COL=['#9aa7c7','#6fb7e8','#3a9bdc','#2bb39a','#e0b13a','#e8873a','#d3505a','#8f2a6b'];
 const ci=r=>BR.findIndex(b=>b[1]==r);
@@ -150,22 +173,26 @@ const TYPES={s:['เงินเดือน (40(1))','a'],f:['ฟรีแล�
 let incs=[{t:'s',v:0}];
 try{const sv=JSON.parse(localStorage.getItem('tb1')||'null');if(sv&&sv.incs&&sv.incs.length)incs=sv.incs}catch(e){}
 
-function renderIncs(){
- $('#incs').innerHTML=incs.map((r,i)=>`<div class="inc"><select aria-label="ประเภทรายได้ ${i+1}" data-i="${i}" data-k="t">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}" ${k==r.t?'selected':''}>${v[0]}</option>`).join('')}</select><input aria-label="จำนวนเงิน ${i+1}" type="number" inputmode="numeric" min="0" placeholder="บาทต่อปี" value="${r.v||''}" data-i="${i}" data-k="v"><button class="btn" type="button" aria-label="ลบรายได้ ${i+1}" data-del="${i}" ${incs.length==1?'disabled':''}>✕</button></div>`).join('');
+function tween(el,to,suf){const from=el._v||0;el._v=to;cancelAnimationFrame(el._r);if(RM||from===to){el.textContent=f(to)+suf;return}const t0=performance.now(),st=t=>{const p=Math.min(1,(t-t0)/650),e=1-Math.pow(1-p,3);el.textContent=f(from+(to-from)*e)+suf;if(p<1)el._r=requestAnimationFrame(st)};el._r=requestAnimationFrame(st)}
+function enter(sec){sec.classList.remove('enter');void sec.offsetWidth;sec.classList.add('enter');clearTimeout(sec._t);sec._t=setTimeout(()=>sec.classList.remove('enter'),1400)}
+function moveInd(){const b=$('nav [aria-selected=true]'),i=$('#ind');if(!b)return;i.style.width=b.offsetWidth+'px';i.style.transform='translateX('+b.offsetLeft+'px)'}
+
+function renderIncs(pop){
+ $('#incs').innerHTML=incs.map((r,i)=>`<div class="inc${pop&&i==incs.length-1?' pop':''}"><select aria-label="ประเภทรายได้ ${i+1}" data-i="${i}" data-k="t">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}" ${k==r.t?'selected':''}>${v[0]}</option>`).join('')}</select><input aria-label="จำนวนเงิน ${i+1}" type="number" inputmode="numeric" min="0" placeholder="บาทต่อปี" value="${r.v||''}" data-i="${i}" data-k="v"><button class="btn" type="button" aria-label="ลบรายได้ ${i+1}" data-del="${i}" ${incs.length==1?'disabled':''}>✕</button></div>`).join('');
 }
 function taxOf(net){let t=0,prev=0,parts=[];for(const[c,r]of BR){const amt=Math.max(0,Math.min(net,c)-prev);parts.push({amt,r,tax:amt*r});t+=amt*r;prev=c;if(net<=c)break}return{t,parts}}
 function state(extra){
  const a={rmf:num('#a_rmf'),ssf:num('#a_ssf'),pension:num('#a_pension'),life:num('#a_life'),health:num('#a_health'),home:num('#a_home')};
  if(extra)a[extra.k]+=extra.v;
- let ab=0,bb=0,nn=0;incs.forEach(r=>{const v=+r.v||0,g=TYPES[r.t][1];if(g=='a')ab+=v;else if(g=='b')bb+=v;else nn+=v});
+ let ab=0,bb=0,nn=0,sal=0;incs.forEach(r=>{const v=+r.v||0,g=TYPES[r.t][1];if(r.t=='s')sal+=v;if(g=='a')ab+=v;else if(g=='b')bb+=v;else nn+=v});
  const gross=ab+bb+nn,exp=Math.min(ab*.5,100000)+bb*.6;
- const sp=+$('#sp').value*60000,kid=num('#kid')*30000,par=Math.min(4,num('#par'))*30000,sso=Math.min(9000,num('#sso'));
+ const sp=+$('#sp').value*60000,kid=num('#kid')*30000+num('#kid2')*60000,par=Math.min(4,num('#par'))*30000,sso=Math.min(9000,num('#sso'));
  const lifeC=Math.min(a.life,100000),healthC=Math.min(a.health,25000),ins=Math.min(lifeC+healthC,100000);
  const rmfC=Math.min(a.rmf,gross*.3,500000),ssfC=Math.min(a.ssf,gross*.3,200000),penC=Math.min(a.pension,gross*.15,200000);
- const ret=Math.min(rmfC+ssfC+penC,500000),homeC=Math.min(a.home,100000);
- const allow=60000+sp+kid+par+sso+ins+ret+homeC;
- const net=Math.max(0,gross-exp-allow),r=taxOf(net);
- return{gross,exp,allow,net,tax:r.t,parts:r.parts,ret,ins,rmfC,ssfC,penC,healthC,homeC,
+ const pvd=Math.min(num('#pvd'),gross*.15,500000),ret=Math.min(rmfC+ssfC+penC+pvd,500000),homeC=Math.min(a.home,100000);
+ const allow=60000+sp+kid+par+sso+Math.min(15000,num('#phl'))+ins+ret+homeC;
+ const net=Math.max(0,gross-exp-allow),r=taxOf(net),altBase=gross-sal,alt=altBase>120000?altBase*.005:0;
+ return{gross,exp,allow,net,tax:Math.max(r.t,alt),alt:alt>r.t,parts:r.parts,ret,ins,rmfC,ssfC,penC,healthC,homeC,
   max:{rmf:Math.min(gross*.3,500000),ssf:Math.min(gross*.3,200000),pension:Math.min(gross*.15,200000),life:100000,health:25000,home:100000}};
 }
 function room(S,k){
@@ -177,12 +204,13 @@ function room(S,k){
 function calc(){
  const S=state(),wh=num('#wh'),diff=S.tax-wh;
  $('#rLabel').textContent=diff<0?'ภาษีที่ได้คืน':'ภาษีที่ต้องจ่าย';
- $('#rBig').textContent=f(Math.abs(diff))+' บาท';$('#rBig').style.color=diff<0?'var(--acc)':'var(--ink)';
+ tween($('#rBig'),Math.abs(diff),' บาท');$('#rBig').style.color=diff<0?'var(--acc)':'var(--ink)';
  const p=$('#rPill');
  if(!S.gross){p.className='pill ok';p.textContent='ใส่รายได้เพื่อเริ่มคำนวณ'}
  else if(S.tax==0){p.className='pill ok';p.textContent='เงินได้สุทธิไม่เกิน 150,000 บาท ไม่มีภาษี'+(wh>0?' และขอคืนที่หักไว้ได้':'')}
  else if(diff<0){p.className='pill ok';p.textContent='ยื่นภาษีแล้วได้เงินคืน'}
  else{p.className='pill wn';p.textContent='ขั้นสูงสุดที่คุณอยู่: '+Math.round(S.parts[S.parts.length-1].r*100)+'%'}
+ if(S.alt){p.className='pill wn';p.textContent='คิดภาษีขั้นต่ำ 0.5% ของรายได้ 40(2)–(8) เพราะสูงกว่าวิธีขั้นบันได'}
  $('#bar').innerHTML=S.net?S.parts.map(x=>x.amt?`<i style="width:${x.amt/S.net*100}%;background:${COL[ci(x.r)]}"></i>`:'').join(''):'';
  $('#tbl tbody').innerHTML=S.parts.filter(x=>x.amt).map(x=>`<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${COL[ci(x.r)]};margin-right:6px"></span>${Math.round(x.r*100)}%</td><td>${f(x.amt)}</td><td>${f(x.tax)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mut)">ยังไม่มีเงินได้สุทธิ</td></tr>';
  $('#sum').innerHTML=[['รายได้รวม',S.gross],['หักค่าใช้จ่าย',-S.exp],['หักค่าลดหย่อน',-S.allow],['เงินได้สุทธิ',S.net],['ภาษีตามขั้นบันได',S.tax],['หักภาษี ณ ที่จ่าย',-wh]].map(([a,b])=>`<div class="kv"><span>${a}</span><b>${b<0?'−':''}${f(Math.abs(b))}</b></div>`).join('');
@@ -210,10 +238,10 @@ function riskc(){
  row('ยอดขายเทียบเกณฑ์ VAT',rv,1.8e6,'บาท',rv>=1.8e6?'ต้องจดทะเบียน VAT ภายใน 30 วันนับจากวันที่รายได้เกินเกณฑ์':'ควรเตรียมเอกสารและบัญชีก่อนถึงเกณฑ์')+
  '<p class="hint">ถูกรายงานไม่ได้แปลว่าต้องเสียภาษีเพิ่ม แต่ควรเก็บหลักฐานรายรับ–รายจ่ายไว้ให้พร้อมชี้แจง</p>';
 }
-$$('nav button').forEach(b=>b.onclick=()=>{$$('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));['calc','opt','risk-s','ai'].forEach(id=>$('#'+id).hidden=id!==b.dataset.t);window.scrollTo(0,0)});
+$$('nav button').forEach(b=>b.onclick=()=>{$$('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));['calc','opt','risk-s','ai'].forEach(id=>$('#'+id).hidden=id!==b.dataset.t);enter($('#'+b.dataset.t));moveInd();window.scrollTo({top:0,behavior:RM?'auto':'smooth'})});
 $('#incs').addEventListener('input',e=>{const d=e.target.dataset;if(d.k=='v')incs[d.i].v=parseFloat(e.target.value)||0;else if(d.k=='t')incs[d.i].t=e.target.value;calc()});
 $('#incs').addEventListener('click',e=>{const i=e.target.dataset.del;if(i!=null){incs.splice(i,1);renderIncs();calc()}});
-$('#addInc').onclick=()=>{incs.push({t:'f',v:0});renderIncs();calc()};
+$('#addInc').onclick=()=>{incs.push({t:'f',v:0});renderIncs(true);calc()};
 $$('input:not(#ci):not([data-k]),select:not([data-k])').forEach(el=>el.addEventListener('input',calc));
 const KB=[
  [/ต้องยื่น|ยื่นไหม|เกณฑ์ขั้นต่ำ/,'ผู้มีเงินได้เงินเดือน (40(1)) เกิน 120,000 บาทต่อปี (โสด) หรือ 220,000 บาท (คู่สมรสมีเงินได้) ต้องยื่น ส่วนเงินได้ประเภทอื่นเกิน 60,000 บาทก็ต้องยื่น ถ้าถูกหัก ณ ที่จ่ายไว้ แม้ไม่ถึงเกณฑ์ ก็ยื่นเพื่อขอคืนได้'],
@@ -226,18 +254,57 @@ const KB=[
  [/ฟรีแลนซ์|ค่าใช้จ่าย|เหมา/,'ในแอปนี้ เงินเดือนและรับจ้างหักเหมา 50% ไม่เกิน 100,000 บาท (รวมกัน) ส่วนขายของ/ธุรกิจ 40(8) ใช้เหมา 60% เป็นค่าประมาณ บางประเภทกิจการอัตราไม่เท่ากัน หรืออาจหักตามจริงถ้ามีหลักฐาน']
 ];
 const chat=$('#chat');
-function say(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function say(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
 function ans(q){
  if(/ภาษีของฉัน|ต้องจ่าย|เท่าไหร่|คืน/.test(q)){const S=state(),d=S.tax-num('#wh');return S.gross?`จากข้อมูลที่กรอก เงินได้สุทธิ ${f(S.net)} บาท ภาษี ${f(S.tax)} บาท`+(d<0?` คุณได้คืนประมาณ ${f(-d)} บาท`:` ต้องจ่ายเพิ่มประมาณ ${f(d)} บาท`):'ยังไม่มีรายได้ในระบบ ไปกรอกที่แท็บ “คำนวณภาษี” ก่อนนะ'}
  for(const[re,a]of KB)if(re.test(q))return a;
  return 'ตอนนี้ตอบได้เรื่อง: เกณฑ์ต้องยื่น, ภาษีย้อนหลัง, VAT 1.8 ล้าน, e-Payment, RMF/SSF, ประกัน, 50 ทวิ, ค่าใช้จ่ายเหมา และภาษีของคุณ ลองพิมพ์ด้วยคำเหล่านี้ได้เลย';
 }
-function ask(q){say(q,'u');setTimeout(()=>say(ans(q),'b'),250)}
+async function getSample(){try{return await claude.use('sample')}catch(e){return null}}
+const SYS='คุณคือ TAXBuddy AI ผู้ช่วยภาษีเงินได้บุคคลธรรมดาของไทย พูดภาษาไทยสไตล์ลูกหลาน สุภาพ กระชับ ไม่เกิน 6 ประโยค ใช้ตัวเลขภาษีของผู้ใช้จากข้อมูลที่ให้เท่านั้น ถ้าต้องการจำลองการลดหย่อนให้เรียกเครื่องมือ simulate_deduction ห้ามคำนวณภาษีเองใหม่ ถ้าไม่แน่ใจกฎหรือปีภาษี ให้บอกตรงๆ และแนะนำตรวจกับกรมสรรพากร (rd.go.th) ห้ามอ้างว่าเป็นคำปรึกษาทางกฎหมาย';
+const hist=[];
+function ctx(){const S=state(),mr=S.parts.length?Math.round(S.parts[S.parts.length-1].r*100):0;return JSON.stringify({รายได้รวม:S.gross,หักค่าใช้จ่าย:S.exp,หักลดหย่อน:S.allow,เงินได้สุทธิ:S.net,ภาษีที่คำนวณได้:Math.round(S.tax),ภาษีหักไว้แล้ว:num('#wh'),ขั้นสูงสุด_เปอร์เซ็นต์:mr,ใช้วิธี05เปอร์เซ็นต์:S.alt,สิทธิ์ลดหย่อนที่เหลือ:Object.fromEntries(Object.keys(NAMES).map(k=>[k,Math.round(room(S,k))]))})}
+async function ask(q){
+ say(q,'u');const s=await getSample(),el=say('','b typing'),done=()=>el.classList.remove('typing');
+ if(!s){done();el.textContent=ans(q);return}
+ const msgs=hist.slice(-8).map(m=>({...m}));
+ msgs.push({role:'user',content:SYS+'\n\nข้อมูลของผู้ใช้ตอนนี้: '+ctx()+'\n\nคำถาม: '+q});
+ try{
+  const r=await s(msgs,{cache:false,onText:t=>{if(t.text&&!/^Thinking/.test(t.text)){done();el.textContent=t.text}chat.scrollTop=chat.scrollHeight},tools:[{name:'simulate_deduction',description:'คำนวณภาษีที่ประหยัดได้หากลดหย่อนเพิ่มในประเภทที่ระบุ',inputSchema:{type:'object',properties:{type:{type:'string',enum:Object.keys(NAMES)},amount:{type:'number'}},required:['type','amount']},execute:({type,amount})=>{const S=state(),rm=room(S,type),use=Math.min(Math.max(0,amount),rm);return{ลงได้จริง:use,สิทธิ์เหลือ:rm,ภาษีที่ประหยัด:Math.round(S.tax-state({k:type,v:use}).tax)}}}]});
+  done();el.textContent=r.text;hist.push({role:'user',content:q},{role:'assistant',content:r.text});
+ }catch(err){done();el.textContent=(err&&err.code=='not_granted'?'ยังไม่ได้อนุญาตให้ใช้ AI ตอบจากกฎพื้นฐานแทน\n\n':'AI ไม่ตอบสนองชั่วคราว ตอบจากกฎพื้นฐานแทน\n\n')+ans(q)}
+}
+const SCANP='อ่านเอกสารภาษีไทยในรูปนี้ ตอบเป็น JSON เท่านั้น รูปแบบ {"doc":"withholding|fund|insurance|other","income_type":"salary|freelance|commission|business|other|null","income":ตัวเลขเงินได้ที่จ่ายทั้งปีหรือ null,"withheld":ตัวเลขภาษีที่หักไว้หรือ null,"product":"rmf|ssf|pension|life|health|home|null","amount":ตัวเลขเงินที่ซื้อ/เบี้ยประกัน หรือ null,"confidence":"high|low"} ห้ามเดาตัวเลขที่อ่านไม่ออก ให้ใส่ null';
+$('#scanBtn').onclick=()=>$('#scanFile').click();
+$('#scanFile').onchange=async e=>{
+ const file=e.target.files[0];e.target.value='';if(!file)return;const out=$('#scanOut');
+ const s=await getSample();
+ if(!s){out.textContent='ฟีเจอร์นี้ใช้ได้เมื่อเปิดหน้านี้ใน Claude และอนุญาตสิทธิ์ ตอนนี้กรอกตัวเลขเองได้เลย';return}
+ out.textContent='AI กำลังอ่านเอกสาร…';
+ try{
+  const lim=await s.limits();if(!lim.images){out.textContent='ตอนนี้อ่านรูปไม่ได้ กรอกตัวเลขเองได้เลย';return}
+  const d=await s.json(SCANP,{images:[file],cache:false}),n=v=>Math.max(0,Number(v)||0);
+  const tm={salary:'s',freelance:'f',commission:'c',business:'o',other:'x'};
+  const parts=[];
+  if(d.doc=='withholding'){if(n(d.income))parts.push('เงินได้ '+f(n(d.income))+' บาท');if(n(d.withheld))parts.push('ภาษีที่หัก '+f(n(d.withheld))+' บาท')}
+  else if(NAMES[d.product]&&n(d.amount))parts.push(NAMES[d.product].m+' '+f(n(d.amount))+' บาท');
+  if(!parts.length){out.textContent='อ่านตัวเลขไม่ชัด ลองถ่ายใหม่ให้เห็นทั้งหน้า หรือกรอกเองได้เลย';return}
+  out.innerHTML=(d.confidence=='low'?'<b>ภาพไม่ชัด ตรวจตัวเลขก่อนใช้</b><br>':'')+'AI อ่านได้: '+parts.join(' · ')+' <button class="btn" id="scanOk" type="button" style="min-height:36px;margin-left:6px">ใช้ตัวเลขนี้</button>';
+  $('#scanOk').onclick=()=>{
+   if(d.doc=='withholding'){if(n(d.income))incs.push({t:tm[d.income_type]||'s',v:n(d.income)});$('#wh').value=num('#wh')+n(d.withheld);renderIncs(true)}
+   else{const el=$('#a_'+d.product);el.value=num('#a_'+d.product)+n(d.amount)}
+   out.textContent='เพิ่มลงในการคำนวณแล้ว';calc()};
+ }catch(err){out.textContent='อ่านเอกสารไม่สำเร็จ กรอกตัวเลขเองได้เลย'}
+};
 $('#cf').onsubmit=e=>{e.preventDefault();const q=$('#ci').value.trim();if(q){ask(q);$('#ci').value=''}};
 $('#chips').innerHTML=['ต้องยื่นภาษีไหม','ภาษีของฉันเท่าไหร่','VAT 1.8 ล้านคืออะไร','RMF กับ SSF','กลัวโดนภาษีย้อนหลัง'].map(t=>`<button type="button">${t}</button>`).join('');
 $('#chips').onclick=e=>{if(e.target.tagName=='BUTTON')ask(e.target.textContent)};
-say('สวัสดี ถามเรื่องภาษีได้เลย เริ่มจากกดหัวข้อด้านล่างก็ได้','b');
-renderIncs();calc();
+$('#th').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('tb-theme',r.dataset.theme)}catch(e){}};
+try{const th=localStorage.getItem('tb-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+say('สวัสดี ผมคือผู้ช่วยภาษี AI ถามได้เลย เช่น “ลงกองทุนเพิ่ม 50,000 ประหยัดเท่าไหร่” หรือถามเรื่องกฎต่างๆ','b');
+renderIncs();calc();enter($('#calc'));moveInd();
+addEventListener('load',moveInd);addEventListener('resize',moveInd);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveInd);
 </script>
 </body>
 </html>
