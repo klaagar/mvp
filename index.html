@@ -3,369 +3,241 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EV-RouteX | ชาร์จไป เดินไป อุดหนุนชุมชน</title>
+<title>TAXBuddy AI – วางแผนภาษีง่ายๆ สไตล์ลูกหลาน</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#e8efe9;--card:#fbfdfb;--ink:#12263a;--mute:#5d7185;--line:#cfdcd2;--teal:#0e7c7b;--tealS:#d3efec;--hot:#f2542d;--hotS:#ffe3da;--sun:#ffb81c;--map:#dfe9e0;--road:#fbfdfb;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a24;--card:#16273a;--ink:#e8f1f5;--mute:#93a9ba;--line:#26405a;--teal:#3ccfc9;--tealS:#12403f;--hot:#ff7a57;--hotS:#4a2218;--sun:#ffc94d;--map:#122232;--road:#1f364d;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0e1a24;--card:#16273a;--ink:#e8f1f5;--mute:#93a9ba;--line:#26405a;--teal:#3ccfc9;--tealS:#12403f;--hot:#ff7a57;--hotS:#4a2218;--sun:#ffc94d;--map:#122232;--road:#1f364d;color-scheme:dark}
-*{box-sizing:border-box}
+:root{--bg:#f4f6fb;--card:#fff;--ink:#12203f;--mut:#5d6985;--line:#e2e7f2;--acc:#0b8f6a;--accbg:#e1f5ee;--warn:#b7770a;--warnbg:#fdf1d8;--bad:#c23b3b;--badbg:#fbe4e4;--pri:#243b8f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1426;--card:#151f38;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0}}
+:root[data-theme="dark"]{--bg:#0d1426;--card:#151f38;--ink:#e8edf9;--mut:#9aa7c7;--line:#26335a;--acc:#3ed3a2;--accbg:#12382f;--warn:#f2b84a;--warnbg:#3a2e12;--bad:#ff8585;--badbg:#401c1f;--pri:#6f89f0}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Sarabun,"Noto Sans Thai",system-ui,sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
-h1,h2,h3,.pr{font-family:Prompt,"Noto Sans Thai",system-ui,sans-serif;margin:0;letter-spacing:-.01em}
-button{font:inherit;cursor:pointer;border:0;color:inherit}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 0 10px}
-.logo{font:800 26px Prompt,sans-serif;display:flex;align-items:center;gap:8px}
-.logo i{width:34px;height:34px;border-radius:10px;background:var(--teal);display:grid;place-items:center;color:#fff;font-style:normal;font-size:18px}
-.logo b{color:var(--hot)}
-.tag{color:var(--mute);font-size:14px;flex:1;min-width:180px}
-nav{display:flex;gap:6px;background:var(--card);padding:5px;border-radius:999px;border:1px solid var(--line);overflow-x:auto;max-width:100%}
-nav button{background:none;padding:9px 16px;border-radius:999px;font:600 14px Prompt,sans-serif;white-space:nowrap;color:var(--mute)}
-nav button[aria-selected=true]{background:var(--ink);color:var(--bg)}
-.th{background:var(--card);border:1px solid var(--line);border-radius:50%;width:40px;height:40px}
-.hero{padding:10px 0 18px}
-.hero h1{font-size:clamp(28px,5vw,48px);line-height:1.12;font-weight:800;max-width:15em}
-.hero p{color:var(--mute);max-width:36em;margin:8px 0 0}
-.grid{display:grid;grid-template-columns:1.45fr 1fr;gap:16px;align-items:start}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-.card h3{font-size:17px;margin-bottom:10px}
-.mapbox{padding:0;overflow:hidden;position:relative}
-svg.map{display:block;width:100%;height:auto;background:var(--map)}
-.legend{display:flex;gap:14px;flex-wrap:wrap;padding:10px 14px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}
-.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--c)}
-.row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:10px 0}
-.row label{font-size:14px;font-weight:600;min-width:0}
-.row output{font:600 14px Prompt;color:var(--teal)}
-input[type=range]{width:100%;accent-color:var(--teal)}
-.seg{display:flex;gap:6px}
-.seg button{flex:1;padding:8px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:13px}
-.seg button[aria-pressed=true]{background:var(--teal);color:#fff;border-color:var(--teal)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
-.stat{background:var(--bg);border-radius:12px;padding:10px}
-.stat small{color:var(--mute);display:block;font-size:12px}
-.stat b{font:800 20px Prompt}
-.timer{background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-top:10px}
-.timer .t{font:800 34px Prompt;font-variant-numeric:tabular-nums;min-width:4.2ch}
-.bar{flex:1;height:8px;background:rgba(127,127,127,.35);border-radius:9px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--sun);transition:width .8s}
-.btn{background:var(--hot);color:#fff;border-radius:12px;padding:11px 16px;font:600 15px Prompt;width:100%}
-.btn.alt{background:var(--teal)}
-.btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.shop{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card);width:100%;text-align:left}
-.shop[aria-pressed=true]{border-color:var(--hot);background:var(--hotS)}
-.shop .e{font-size:28px}.shop .m{flex:1;min-width:0}.shop b{display:block;font-family:Prompt;font-size:15px}
-.shop small{color:var(--mute)}
-.badge{font:600 12px Prompt;padding:3px 9px;border-radius:99px;white-space:nowrap}
-.ok{background:var(--tealS);color:var(--teal)}.no{background:var(--hotS);color:var(--hot)}
-.empty{color:var(--mute);text-align:center;padding:18px 8px;border:1px dashed var(--line);border-radius:12px}
-.qr{display:block;margin:10px auto;width:150px;height:150px;background:#fff;border-radius:10px;padding:8px}
-.pill{display:inline-block;background:var(--sun);color:#3a2800;font:600 12px Prompt;padding:3px 10px;border-radius:99px}
-.big{font:800 clamp(22px,4vw,30px) Prompt}
-.scan{height:220px;border-radius:18px;background:var(--ink);position:relative;overflow:hidden;display:grid;place-items:center;color:var(--bg);text-align:center;padding:12px}
-.scan.on::after{content:"";position:absolute;left:0;right:0;height:3px;background:var(--sun);box-shadow:0 0 18px var(--sun);animation:sc 1s ease-in-out infinite alternate}
-@keyframes sc{from{top:8%}to{top:90%}}
-.scanbtn{font-size:20px;padding:18px;border-radius:18px}
-.ord{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.ord:last-child{border:0}
-.stamps{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px}
-.stamp{aspect-ratio:1;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:30px;text-align:center;position:relative;filter:grayscale(1);opacity:.5}
-.stamp.got{filter:none;opacity:1;border:3px solid var(--hot);background:var(--hotS);transform:rotate(-6deg);animation:pop .4s}
-@keyframes pop{from{transform:scale(1.5) rotate(-20deg)}}
-.stamp small{position:absolute;bottom:-18px;font-size:11px;color:var(--mute);white-space:nowrap;left:50%;transform:translateX(-50%)}
-.rew{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;border:1px solid var(--line);margin-bottom:8px}
-.rew.un{border-color:var(--teal);background:var(--tealS)}
-.rew .need{font:800 22px Prompt;min-width:2ch;text-align:center}
-.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:14px;transition:.35s;z-index:9;max-width:92vw;font-weight:600}
-.toast.on{transform:translate(-50%,0)}
-.pin{cursor:pointer}
-.ring{animation:dash 6s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-60}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-footer{color:var(--mute);font-size:13px;text-align:center;padding:24px 0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 "IBM Plex Sans Thai",system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;gap:12px;padding:8px 0 16px}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:700}
+header h1{font-size:20px;margin:0;line-height:1.2}header p{margin:0;color:var(--mut);font-size:13px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+nav button{flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);font-weight:500;font-size:14px;font-family:inherit;padding:10px 14px;border-radius:10px;cursor:pointer;min-height:44px}
+nav button[aria-selected=true]{background:var(--pri);color:#fff}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.grid.two{grid-template-columns:1.1fr .9fr}.sticky{position:sticky;top:12px;align-self:start}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+h2{font-size:18px;margin:0 0 4px}h3{font-size:15px;margin:18px 0 8px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
+label{display:block;font-size:14px;font-weight:500;margin:10px 0 4px}
+input,select{width:100%;min-height:46px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inc{display:grid;grid-template-columns:1.2fr 1fr 44px;gap:8px;margin-bottom:8px}
+.btn{min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;font-size:14px;font-family:inherit;padding:0 16px;cursor:pointer}
+.btn.p{background:var(--pri);border-color:var(--pri);color:#fff}
+.hint{font-size:12.5px;color:var(--mut);margin:4px 0 0}
+.big{font-size:44px;font-weight:700;line-height:1.15;margin:4px 0}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:500}
+.ok{background:var(--accbg);color:var(--acc)}.wn{background:var(--warnbg);color:var(--warn)}.bd{background:var(--badbg);color:var(--bad)}
+.bar{display:flex;height:22px;border-radius:8px;overflow:hidden;background:var(--line);margin:10px 0}
+.bar i{display:block;height:100%}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--mut);font-weight:500}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.kv b{font-weight:600}
+.meter{height:12px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;border-radius:8px}
+.save{background:var(--accbg);color:var(--acc);border-radius:14px;padding:16px;margin-top:12px}
+.save b{font-size:26px}
+.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px}
+.m{max-width:88%;padding:10px 14px;border-radius:14px;font-size:15px}
+.m.u{align-self:flex-end;background:var(--pri);color:#fff}.m.b{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:8px 14px;font:inherit;font-size:13.5px;cursor:pointer;min-height:40px}
+.chatrow{display:flex;gap:8px}.chatrow input{flex:1}
+.disc{font-size:12.5px;color:var(--mut);text-align:center;padding:20px 8px}
 [hidden]{display:none!important}
-:root{--bg:#eaf1ed;--shadow:0 1px 2px rgba(10,26,42,.06),0 10px 28px -10px rgba(10,26,42,.16),0 30px 60px -30px rgba(10,26,42,.22)}
-body{background:radial-gradient(900px 520px at 88% -8%,rgba(14,168,158,.22),transparent 60%),radial-gradient(700px 420px at -8% 8%,rgba(255,90,60,.12),transparent 60%),var(--bg);background-attachment:fixed}
-header{position:sticky;top:0;z-index:20;margin:0 -16px;padding:12px 16px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.logo{font-size:24px}.logo i{background:linear-gradient(135deg,#0ea89e,#0a6f74);box-shadow:0 6px 16px -4px rgba(14,168,158,.6)}
-nav{box-shadow:var(--shadow)}nav button{transition:.2s}
-.card{border-radius:24px;padding:18px;box-shadow:var(--shadow);border-color:transparent}
-.card h3{font-size:18px;font-weight:600}
-.hero{position:relative;overflow:hidden;padding:30px 26px;margin:6px 0 18px;border-radius:30px;color:#fff;background:linear-gradient(135deg,#052b36 0%,#0a6f74 58%,#14b8a6 100%);box-shadow:0 30px 60px -28px rgba(5,43,54,.7)}
-.hero::before{content:"⚡";position:absolute;right:18px;top:-34px;font-size:210px;opacity:.13;transform:rotate(14deg)}
-.hero h1{position:relative;font-size:clamp(30px,5.6vw,56px);line-height:1.08;font-weight:800;max-width:14em}
-.hero p{position:relative;color:rgba(255,255,255,.8);font-size:17px}
-.chips{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:99px;font:600 13px Prompt;backdrop-filter:blur(8px)}
-.mapbox{border-radius:28px}
-svg.map{background:var(--map)}
-.pin{transition:transform .2s;transform-box:fill-box;transform-origin:center}.pin:hover{transform:scale(1.14)}
-.pin circle{filter:drop-shadow(0 4px 6px rgba(0,0,0,.28))}
-.pulse{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-out infinite}
-@keyframes pl{from{transform:scale(1);opacity:.55}to{transform:scale(2.5);opacity:0}}
-.legend{background:color-mix(in srgb,var(--card) 70%,transparent)}
-.stat{border-radius:16px;border:1px solid var(--line)}.stat b{font-size:22px}
-.shop{border-radius:16px;transition:.2s;box-shadow:0 1px 0 rgba(0,0,0,.03)}.shop:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.shop[aria-pressed=true]{box-shadow:0 0 0 2px var(--hot)}
-.btn{background:linear-gradient(135deg,#ff7a4d,#f2432a);box-shadow:0 10px 22px -8px rgba(242,67,42,.6);border-radius:14px;padding:13px 18px;transition:transform .15s,box-shadow .2s}
-.btn.alt{background:linear-gradient(135deg,#14b8a6,#0a7f7a);box-shadow:0 10px 22px -8px rgba(14,168,158,.6)}
-.btn.ghost{background:var(--bg);box-shadow:none}
-.btn:not(:disabled):active{transform:scale(.97)}
-.timer{background:linear-gradient(135deg,#06303a,#0b4f58);color:#fff;border-radius:18px;box-shadow:0 14px 28px -14px rgba(5,43,54,.8)}
-.timer .t{font-size:38px;color:var(--sun)}
-#orderCard{background:linear-gradient(180deg,var(--card) 55%,var(--tealS))}
-.qr{box-shadow:0 0 0 2px var(--line),var(--shadow);width:170px;height:170px}
-.tl{display:flex;height:36px;border-radius:12px;overflow:hidden;gap:2px;margin:6px 0 4px}
-.tl i{display:grid;place-items:center;min-width:0}
-.tl span{font:600 11px Prompt;color:#fff;white-space:nowrap;overflow:hidden;padding:0 4px}
-.tl i:last-child:not(:first-child){background:var(--line)!important}.tl i:last-child:not(:first-child) span{color:var(--mute)}
-.tll{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:10px}
-.scan{border-radius:24px;background:linear-gradient(160deg,#06303a,#0b1b2b)}
-.stamp.got{box-shadow:0 8px 18px -6px rgba(242,84,45,.5)}
-.rew{border-radius:18px}
-@media(max-width:700px){.tag{display:none}.hero{padding:24px 20px;border-radius:26px}nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;justify-content:space-around;box-shadow:0 14px 36px rgba(0,0,0,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:color-mix(in srgb,var(--card) 88%,transparent)}nav button{flex:1;padding:12px 4px}body{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}.toast{bottom:100px}}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-.grid3 b{font:800 44px/1 Prompt;color:var(--teal);display:block;margin-bottom:6px}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
-.steps div{background:var(--bg);border-radius:18px;padding:14px;font-size:14px}.steps b{display:block;font:600 15px Prompt;margin:4px 0}.steps span{font-size:30px}
-.cta{position:relative;display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.cta .btn{width:auto;padding:14px 26px;font-size:17px}
-.hero .btn.ghost{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.35)}
-@media(max-width:700px){.grid3,.steps{grid-template-columns:1fr 1fr}.grid3>.card:first-child{grid-column:1/-1}}
-@media(min-width:901px){#b2c .grid,#b2b .grid,#pass .grid{display:flex;flex-direction:column;align-items:stretch;gap:14px;width:470px;max-width:100%;margin:0 auto 30px;padding:34px 14px 18px;border:11px solid #0b1b2b;border-radius:56px;background:var(--bg);box-shadow:0 40px 80px -30px rgba(5,43,54,.6);max-height:800px;overflow-y:auto;scrollbar-width:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
- <div class="logo" id="logo" style="cursor:pointer"><i>⚡</i>EV-Route<b>X</b></div>
- <div class="tag">รอชาร์จ 30 นาที ให้เป็นเวลาอุดหนุนร้านชุมชนรอบสถานี</div>
- <nav role="tablist" aria-label="เมนูหลัก">
-  <button role="tab" aria-selected="true" data-tab="home">🏠 หน้าแรก</button><button role="tab" aria-selected="false" data-tab="b2c">🚗 คนขับ EV</button>
-  <button role="tab" aria-selected="false" data-tab="b2b">🏪 ร้านค้าชุมชน</button>
-  <button role="tab" aria-selected="false" data-tab="pass">🎫 KMITL Passport</button>
- </nav>
- <button class="th" id="theme" aria-label="สลับโหมดสว่าง/มืด">◐</button>
-</header>
+<header><div class="logo" aria-hidden="true">TB</div><div><h1>TAXBuddy AI</h1><p>ภาษีเงินได้บุคคลธรรมดา · อัตราขั้นบันได 0–35%</p></div></header>
+<nav role="tablist" aria-label="เมนูหลัก">
+<button role="tab" aria-selected="true" data-t="calc">คำนวณภาษี</button>
+<button role="tab" aria-selected="false" data-t="opt">วางแผนลดหย่อน</button>
+<button role="tab" aria-selected="false" data-t="risk-s">เฝ้าระวังความเสี่ยง</button>
+<button role="tab" aria-selected="false" data-t="ai">ถามผู้ช่วย</button>
+</nav>
 
-<!-- B2C -->
-<section id="home" role="tabpanel">
- <div class="hero"><h1>รอชาร์จ 30 นาที ร้านข้างๆ ไม่มีลูกค้า</h1><p>EV-RouteX เปลี่ยนเวลารอชาร์จของคนขับ EV ให้เป็นรายได้ของร้านชุมชนในรัศมีเดินถึง คำนวณให้ด้วยว่าเดินไปกลับและรอทำอาหารทันก่อนรถชาร์จเสร็จ</p><div class="cta"><button class="btn" id="goDemo">▶ ดูเดโมอัตโนมัติ</button><button class="btn ghost" id="goTry">ลองใช้เอง</button></div></div>
- <div class="grid3"><div class="card"><b>30 นาที</b>เวลาที่คนขับ EV นั่งรอชาร์จที่ปั๊ม</div><div class="card"><b>200 ม.</b>ร้านชุมชนอยู่ห่างแค่นี้ แต่ไม่มีใครรู้</div><div class="card"><b>฿6/วัน</b>ค่าบริการร้านค้า คืนทุนเมื่อมีลูกค้าเดือนละ 4 คน</div></div>
- <div class="card"><h3>ทำงานอย่างไร</h3><div class="steps"><div><span>🔌</span><b>เสียบปลั๊ก</b>ระบบคำนวณแบตและเวลาชาร์จ</div><div><span>🧭</span><b>จับคู่ร้าน</b>เลือกร้านที่เดินไปกลับทัน</div><div><span>🎫</span><b>สั่งล่วงหน้า</b>ได้ QR ส่วนลด ร้านเตรียมของรอ</div><div><span>🏅</span><b>สะสมแสตมป์</b>ร้านสแกน เงินเข้าทันที</div></div></div>
-</section>
-<section id="b2c" role="tabpanel" hidden>
- <div class="hero"><h1>เลือกสถานีชาร์จ แล้วดูว่า 30 นาทีนี้ เดินไปกินอะไรทันบ้าง</h1><p>แตะหมุดสถานีบนแผนที่ ระบบคำนวณแบตตอนถึง เวลาชาร์จ และเลือกร้านที่เดินไปกลับ+รอทำอาหารทันก่อนรถชาร์จเสร็จ</p><div class="chips"><span>⚡ คำนวณแบตตามจราจร</span><span>🚶 รัศมีเดิน 100–300 ม.</span><span>🎫 สั่งล่วงหน้า รับ QR</span></div></div>
- <div class="grid">
-  <div class="card mapbox">
-   <svg class="map" id="map" viewBox="0 0 800 520" role="img" aria-label="แผนที่สถานีชาร์จและร้านค้าชุมชน"></svg>
-   <div class="legend"><span style="--c:var(--teal)">สถานีชาร์จ</span><span style="--c:var(--hot)">ร้านค้าชุมชน</span><span style="--c:var(--sun)">รถของคุณ</span><span>วงรัศมีเดินเท้า = ระยะที่เลือก</span></div>
-  </div>
-  <div>
-   <div class="card">
-    <h3>1) สถานะรถและเส้นทาง</h3>
-    <div class="row"><label for="soc">แบตตอนนี้</label><output id="socO"></output></div>
-    <input type="range" id="soc" min="8" max="70" value="24">
-    <div class="row"><label>การจราจร</label></div>
-    <div class="seg" id="traffic"><button data-v="0" aria-pressed="false">โล่ง</button><button data-v="1" aria-pressed="true">หนาแน่น</button><button data-v="2" aria-pressed="false">ติดหนัก</button></div>
-    <div class="row"><label for="rad">รัศมีเดินเท้า</label><output id="radO"></output></div>
-    <input type="range" id="rad" min="100" max="300" step="50" value="300">
-    <div id="calc"></div>
-   </div>
-   <div class="card" style="margin-top:14px">
-    <h3>2) ร้านที่เดินไปทัน</h3>
-    <div id="shops"></div>
-   </div>
-   <div class="card" id="orderCard" style="margin-top:14px" hidden></div>
-  </div>
- </div>
-</section>
-
-<!-- B2B -->
-<section id="b2b" role="tabpanel" hidden>
- <div class="hero"><h1>ป้าขายของใช้เป็นใน 1 นาที: สแกน QR เงินเข้าทันที</h1><p>ลูกค้า EV สั่งล่วงหน้าตอนเสียบปลั๊ก ร้านเตรียมของให้ทันตอนเขาเดินมาถึง</p></div>
- <div class="grid">
-  <div>
-   <div class="card">
-    <div class="row"><label for="myshop">ร้านของฉัน</label><select id="myshop"></select></div>
-    <div class="scan" id="scan"><div><div style="font-size:44px">📷</div><div id="scanTxt">กดปุ่มด้านล่างเพื่อสแกน QR ส่วนลดจากคนขับ EV</div></div></div>
-    <button class="btn scanbtn" id="scanBtn" style="margin-top:12px">สแกน QR รับออเดอร์</button>
-    <div class="stats"><div class="stat"><small>ยอดวันนี้</small><b id="rev">฿0</b></div><div class="stat"><small>ออเดอร์สำเร็จ</small><b id="cnt">0</b></div><div class="stat"><small>ลูกค้า EV รอมา</small><b id="pend">0</b></div></div>
-   </div>
-   <div class="card" style="margin-top:14px"><h3>ออเดอร์ของร้านนี้</h3><div id="orders"></div></div>
-  </div>
-  <div class="card">
-   <h3>คุ้มไหม? คำนวณก่อนสมัคร</h3>
-   <div class="row"><label for="cpd">ลูกค้า EV ต่อวัน</label><output id="cpdO"></output></div>
-   <input type="range" id="cpd" min="0" max="15" value="1">
-   <div class="row"><label for="pf">กำไรต่อออเดอร์</label><output id="pfO"></output></div>
-   <input type="range" id="pf" min="20" max="120" step="5" value="50">
-   <div class="seg" id="plan" style="margin-top:14px"><button data-v="free" aria-pressed="true">เริ่มฟรี หัก 8%/ออเดอร์</button><button data-v="saas" aria-pressed="false">รายเดือน ฿199</button></div>
-   <div id="roi" style="margin-top:14px"></div>
-  </div>
- </div>
-</section>
-
-<!-- Passport -->
-<section id="pass" role="tabpanel" hidden>
- <div class="hero"><h1>KMITL Passport: ยิ่งแวะร้านรอบจุดชาร์จ ยิ่งได้ส่วนลด</h1><p>ทุกครั้งที่ร้านสแกนออเดอร์ของคุณสำเร็จ จะได้แสตมป์ดิจิทัลของร้านนั้น สะสมครบแล้วแลกส่วนลดค่าชาร์จหรือร้านถัดไป</p></div>
- <div class="grid">
-  <div class="card"><div class="stats" id="impact"></div><div class="row"><h3>แสตมป์ของฉัน</h3><span class="pill" id="stc"></span></div><div class="stamps" id="stamps" style="padding-bottom:20px"></div></div>
-  <div class="card"><h3>รางวัล</h3><div id="rewards"></div><button class="btn ghost" id="reset" style="margin-top:8px">ล้างข้อมูลเดโม</button></div>
- </div>
-</section>
-<footer>EV-RouteX · ต้นแบบสำหรับ KMITL Hackathon · ข้อมูลร้านและสถานีเป็นข้อมูลจำลอง</footer>
+<section id="calc"><div class="grid two">
+<div class="card">
+<h2>รายได้ของคุณทั้งปี</h2><p class="sub">เพิ่มได้หลายแหล่ง ระบบรวมและหักค่าใช้จ่ายให้อัตโนมัติ</p>
+<div id="incs"></div>
+<button class="btn" id="addInc" type="button">+ เพิ่มรายได้</button>
+<label for="wh">ภาษีที่ถูกหัก ณ ที่จ่ายแล้ว (บาท)</label>
+<input id="wh" type="number" inputmode="numeric" min="0" placeholder="ดูได้จากใบ 50 ทวิ">
+<p class="hint">รวมยอดจากทุกใบ 50 ทวิ ระบบจะนำไปหักจากภาษีที่ต้องจ่าย</p>
+<h3>ค่าลดหย่อนพื้นฐาน</h3>
+<div class="row">
+<div><label for="sp">คู่สมรสไม่มีรายได้</label><select id="sp"><option value="0">ไม่มี</option><option value="1">มี (60,000)</option></select></div>
+<div><label for="kid">บุตร (คนละ 30,000)</label><input id="kid" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="par">บิดามารดา (คนละ 30,000)</label><input id="par" type="number" inputmode="numeric" min="0" max="4" value="0"></div>
+<div><label for="sso">ประกันสังคม (สูงสุด 9,000)</label><input id="sso" type="number" inputmode="numeric" min="0" value="0"></div>
 </div>
-<div class="toast" id="toast" role="status"></div>
+<p class="hint">ค่าลดหย่อนส่วนตัว 60,000 บาท หักให้อัตโนมัติ · กองทุน/ประกันเพิ่มเติม ใส่ในแท็บ “วางแผนลดหย่อน”</p>
+</div>
+<div class="card sticky" aria-live="polite">
+<h2 id="rLabel">ภาษีที่ต้องจ่าย</h2>
+<div class="big" id="rBig">0 บาท</div>
+<span class="pill ok" id="rPill">ใส่รายได้เพื่อเริ่มคำนวณ</span>
+<h3>ภาษีของคุณอยู่ขั้นไหน</h3>
+<div class="bar" id="bar" role="img" aria-label="สัดส่วนเงินได้สุทธิในแต่ละขั้นภาษี"></div>
+<table id="tbl"><thead><tr><th>ขั้น</th><th>เงินได้ในขั้น</th><th>ภาษี</th></tr></thead><tbody></tbody></table>
+<h3>สรุปการคำนวณ</h3>
+<div id="sum"></div>
+</div>
+</div></section>
+
+<section id="opt" hidden><div class="grid two">
+<div class="card">
+<h2>ซื้อเพิ่มแล้วประหยัดเท่าไหร่</h2><p class="sub">คำนวณจากรายได้ในแท็บแรก และสิทธิ์ที่ยังเหลือ</p>
+<label for="oType">ประเภท</label>
+<select id="oType"><option value="rmf">กองทุน RMF</option><option value="ssf">กองทุน SSF</option><option value="pension">ประกันบำนาญ</option><option value="life">ประกันชีวิต</option><option value="health">ประกันสุขภาพ</option><option value="home">ดอกเบี้ยบ้าน</option></select>
+<label for="oAmt">จำนวนเงินที่จะลงเพิ่ม (บาท)</label>
+<input id="oAmt" type="number" inputmode="numeric" min="0" value="30000">
+<div class="save" id="oRes"></div>
+<h3>ที่คุณมีอยู่แล้ว (บาท)</h3>
+<div class="row">
+<div><label for="a_rmf">RMF</label><input id="a_rmf" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="a_ssf">SSF</label><input id="a_ssf" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="a_pension">ประกันบำนาญ</label><input id="a_pension" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="a_life">ประกันชีวิต</label><input id="a_life" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="a_health">ประกันสุขภาพ</label><input id="a_health" type="number" inputmode="numeric" min="0" value="0"></div>
+<div><label for="a_home">ดอกเบี้ยบ้าน</label><input id="a_home" type="number" inputmode="numeric" min="0" value="0"></div>
+</div>
+</div>
+<div class="card">
+<h2>สิทธิ์ที่ยังเหลือ</h2><p class="sub">เรียงตามสิทธิ์ที่เหลือมากที่สุด</p>
+<label for="risk">ความเสี่ยงที่รับได้</label>
+<select id="risk"><option value="l">ต่ำ – ไม่อยากให้เงินต้นลด</option><option value="m" selected>กลาง</option><option value="h">สูง – ยอมผันผวนเพื่อผลตอบแทน</option></select>
+<div id="room" style="margin-top:12px"></div>
+</div>
+</div></section>
+
+<section id="risk-s" hidden><div class="grid two">
+<div class="card">
+<h2>เช็กความเสี่ยงโดนภาษีย้อนหลัง</h2><p class="sub">กรอกตัวเลขตั้งแต่ 1 มกราคมถึงปัจจุบัน ระบบประมาณทั้งปีให้</p>
+<label for="mon">ผ่านมากี่เดือนแล้ว</label><input id="mon" type="number" inputmode="numeric" min="1" max="12" value="6">
+<label for="etx">จำนวนครั้งที่มีเงินโอนเข้าบัญชี</label><input id="etx" type="number" inputmode="numeric" min="0" value="0">
+<label for="eam">ยอดเงินโอนเข้าบัญชีรวม (บาท)</label><input id="eam" type="number" inputmode="numeric" min="0" value="0">
+<label for="rev">ยอดขายสะสมสำหรับ VAT (บาท)</label><input id="rev" type="number" inputmode="numeric" min="0" value="0">
+<p class="hint">สถาบันการเงินรายงานให้สรรพากรเมื่อเงินเข้า 3,000 ครั้งขึ้นไปต่อปี หรือ 400 ครั้งขึ้นไปและรวม 2 ล้านบาทขึ้นไป · VAT เริ่มเมื่อรายได้จากการขายสินค้า/บริการเกิน 1.8 ล้านบาทต่อปี</p>
+</div>
+<div class="card" id="riskOut" aria-live="polite"></div>
+</div></section>
+
+<section id="ai" hidden><div class="card" style="max-width:720px;margin:auto">
+<h2>ผู้ช่วยภาษี</h2><p class="sub">ถามเรื่องภาษีได้เลย ตอบจากกฎที่ใช้ในแอป และใช้ตัวเลขของคุณถ้ากรอกไว้แล้ว</p>
+<div class="chat" id="chat" role="log"></div>
+<div class="chips" id="chips"></div>
+<form class="chatrow" id="cf"><input id="ci" aria-label="พิมพ์คำถาม" placeholder="เช่น ต้องยื่นภาษีไหม" autocomplete="off"><button class="btn p" type="submit">ส่ง</button></form>
+</div></section>
+
+<p class="disc">เครื่องมือนี้ให้ข้อมูลประกอบการตัดสินใจเท่านั้น ไม่ใช่คำปรึกษาทางภาษี · ตัวเลขคำนวณในเครื่องของคุณ ไม่มีการส่งข้อมูลออก · ตรวจสอบเงื่อนไขล่าสุดกับกรมสรรพากรก่อนยื่นจริง</p>
+</div>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const M_PER_PX=3.3, WALK=80; // เมตร/พิกเซล, เมตร/นาที
-const CAR={x:70,y:455};
-const ST=[
- {n:"PTT EV Station พระจอมเกล้า",x:290,y:210,kw:120},
- {n:"PEA VOLTA ตลาดลาดกระบัง",x:610,y:150,kw:60},
- {n:"EleX by EGAT ถนนฉลองกรุง",x:540,y:395,kw:150}];
-const SH=[
- {n:"ก๋วยเตี๋ยวเรืออาม่า",e:"🍜",x:340,y:170,prep:6,price:55,item:"เรือชามเล็ก+ลูกชิ้น"},
- {n:"ชาไทยป้าอ้อย",e:"🧋",x:245,y:255,prep:3,price:35,item:"ชาไทยเย็น"},
- {n:"ข้าวมันไก่เจ๊หน่อย",e:"🍗",x:230,y:170,prep:5,price:50,item:"ข้าวมันไก่ต้ม"},
- {n:"ปาท่องโก๋สดใหม่",e:"🥖",x:350,y:262,prep:8,price:30,item:"ปาท่องโก๋+น้ำเต้าหู้"},
- {n:"ส้มตำลาบแม่ลำดวน",e:"🥗",x:650,y:92,prep:10,price:60,item:"ตำไทย+ไก่ย่าง"},
- {n:"กาแฟโบราณลุงสม",e:"☕",x:665,y:205,prep:4,price:35,item:"โอเลี้ยงยกล้อ"},
- {n:"ผลไม้ตัดสดน้องมะปราง",e:"🍉",x:560,y:105,prep:2,price:40,item:"ผลไม้รวมถ้วยใหญ่"},
- {n:"หมูปิ้งนมสดยายแจ๋ว",e:"🍢",x:485,y:445,prep:7,price:45,item:"หมูปิ้ง 5 ไม้+ข้าวเหนียว"},
- {n:"ขนมครกเตาถ่าน",e:"🥞",x:595,y:445,prep:5,price:30,item:"ขนมครกชุดใหญ่"},
- {n:"โรตีสายไหมป้าติ๋ม",e:"🫓",x:600,y:335,prep:6,price:40,item:"โรตีไข่+สายไหม"}];
-SH.forEach((s,i)=>{s.id=i;s.st=ST.map((t,j)=>[j,Math.hypot(t.x-s.x,t.y-s.y)]).sort((a,b)=>a[1]-b[1])[0];s.si=s.st[0];s.px=s.st[1];s.dist=Math.round(s.px*M_PER_PX/5)*5;s.walk=s.dist/WALK});
-const REW=[{n:1,t:"ส่วนลดค่ากาแฟ ฿10 ที่ร้านถัดไป"},{n:3,t:"ส่วนลดค่าชาร์จ ฿30 (ทุกสถานีพันธมิตร)"},{n:6,t:"คูปองอาหารฟรี 1 มื้อ + ป้าย EV Local Hero"}];
-let S={soc:24,tr:1,rad:300,si:0,shop:null,orders:[],stamps:{},rev:{},plan:"free",cpd:1,pf:50,seq:1,used:[]};
-try{Object.assign(S,JSON.parse(localStorage.getItem("evrx")||"{}"))}catch(e){}
-const save=()=>{try{localStorage.setItem("evrx",JSON.stringify(S))}catch(e){}};
-let timer=null,tleft=0,ttotal=0;
-function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),2600)}
-const baht=n=>"฿"+Math.round(n).toLocaleString("th-TH");
+const f=n=>Math.round(n).toLocaleString('th-TH');
+const num=id=>Math.max(0,parseFloat($(id).value)||0);
+const BR=[[150000,0],[300000,.05],[500000,.10],[750000,.15],[1000000,.20],[2000000,.25],[5000000,.30],[Infinity,.35]];
+const COL=['#9aa7c7','#6fb7e8','#3a9bdc','#2bb39a','#e0b13a','#e8873a','#d3505a','#8f2a6b'];
+const ci=r=>BR.findIndex(b=>b[1]==r);
+const TYPES={s:['เงินเดือน (40(1))','a'],f:['ฟรีแลนซ์/รับจ้าง (40(2))','a'],c:['ค่าคอมมิชชัน (40(2))','a'],o:['ขายของออนไลน์/ธุรกิจ (40(8))','b'],x:['รายได้อื่นๆ (ไม่หักเหมา)','n']};
+let incs=[{t:'s',v:0}];
+try{const sv=JSON.parse(localStorage.getItem('tb1')||'null');if(sv&&sv.incs&&sv.incs.length)incs=sv.incs}catch(e){}
 
+function renderIncs(){
+ $('#incs').innerHTML=incs.map((r,i)=>`<div class="inc"><select aria-label="ประเภทรายได้ ${i+1}" data-i="${i}" data-k="t">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}" ${k==r.t?'selected':''}>${v[0]}</option>`).join('')}</select><input aria-label="จำนวนเงิน ${i+1}" type="number" inputmode="numeric" min="0" placeholder="บาทต่อปี" value="${r.v||''}" data-i="${i}" data-k="v"><button class="btn" type="button" aria-label="ลบรายได้ ${i+1}" data-del="${i}" ${incs.length==1?'disabled':''}>✕</button></div>`).join('');
+}
+function taxOf(net){let t=0,prev=0,parts=[];for(const[c,r]of BR){const amt=Math.max(0,Math.min(net,c)-prev);parts.push({amt,r,tax:amt*r});t+=amt*r;prev=c;if(net<=c)break}return{t,parts}}
+function state(extra){
+ const a={rmf:num('#a_rmf'),ssf:num('#a_ssf'),pension:num('#a_pension'),life:num('#a_life'),health:num('#a_health'),home:num('#a_home')};
+ if(extra)a[extra.k]+=extra.v;
+ let ab=0,bb=0,nn=0;incs.forEach(r=>{const v=+r.v||0,g=TYPES[r.t][1];if(g=='a')ab+=v;else if(g=='b')bb+=v;else nn+=v});
+ const gross=ab+bb+nn,exp=Math.min(ab*.5,100000)+bb*.6;
+ const sp=+$('#sp').value*60000,kid=num('#kid')*30000,par=Math.min(4,num('#par'))*30000,sso=Math.min(9000,num('#sso'));
+ const lifeC=Math.min(a.life,100000),healthC=Math.min(a.health,25000),ins=Math.min(lifeC+healthC,100000);
+ const rmfC=Math.min(a.rmf,gross*.3,500000),ssfC=Math.min(a.ssf,gross*.3,200000),penC=Math.min(a.pension,gross*.15,200000);
+ const ret=Math.min(rmfC+ssfC+penC,500000),homeC=Math.min(a.home,100000);
+ const allow=60000+sp+kid+par+sso+ins+ret+homeC;
+ const net=Math.max(0,gross-exp-allow),r=taxOf(net);
+ return{gross,exp,allow,net,tax:r.t,parts:r.parts,ret,ins,rmfC,ssfC,penC,healthC,homeC,
+  max:{rmf:Math.min(gross*.3,500000),ssf:Math.min(gross*.3,200000),pension:Math.min(gross*.15,200000),life:100000,health:25000,home:100000}};
+}
+function room(S,k){
+ const used={rmf:S.rmfC,ssf:S.ssfC,pension:S.penC,home:S.homeC,health:S.healthC,life:S.ins-S.healthC}[k];
+ let r=S.max[k]-used;
+ if(['rmf','ssf','pension'].includes(k))r=Math.min(r,500000-S.ret);
+ if(['life','health'].includes(k))r=Math.min(r,100000-S.ins);
+ return Math.max(0,r)}
 function calc(){
- const st=ST[S.si],dpx=Math.hypot(st.x-CAR.x,st.y-CAR.y),km=dpx*0.05*1.25;
- const spd=[55,32,16][S.tr],tmin=km/spd*60,use=km*0.18/60*100,arr=Math.max(3,S.soc-use);
- const kw=Math.min(st.kw,100),cmin=Math.max(1,Math.round((80-arr)/100*60/(kw*0.9)*60));
- return {st,km,tmin,arr,cmin,kw};
+ const S=state(),wh=num('#wh'),diff=S.tax-wh;
+ $('#rLabel').textContent=diff<0?'ภาษีที่ได้คืน':'ภาษีที่ต้องจ่าย';
+ $('#rBig').textContent=f(Math.abs(diff))+' บาท';$('#rBig').style.color=diff<0?'var(--acc)':'var(--ink)';
+ const p=$('#rPill');
+ if(!S.gross){p.className='pill ok';p.textContent='ใส่รายได้เพื่อเริ่มคำนวณ'}
+ else if(S.tax==0){p.className='pill ok';p.textContent='เงินได้สุทธิไม่เกิน 150,000 บาท ไม่มีภาษี'+(wh>0?' และขอคืนที่หักไว้ได้':'')}
+ else if(diff<0){p.className='pill ok';p.textContent='ยื่นภาษีแล้วได้เงินคืน'}
+ else{p.className='pill wn';p.textContent='ขั้นสูงสุดที่คุณอยู่: '+Math.round(S.parts[S.parts.length-1].r*100)+'%'}
+ $('#bar').innerHTML=S.net?S.parts.map(x=>x.amt?`<i style="width:${x.amt/S.net*100}%;background:${COL[ci(x.r)]}"></i>`:'').join(''):'';
+ $('#tbl tbody').innerHTML=S.parts.filter(x=>x.amt).map(x=>`<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${COL[ci(x.r)]};margin-right:6px"></span>${Math.round(x.r*100)}%</td><td>${f(x.amt)}</td><td>${f(x.tax)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mut)">ยังไม่มีเงินได้สุทธิ</td></tr>';
+ $('#sum').innerHTML=[['รายได้รวม',S.gross],['หักค่าใช้จ่าย',-S.exp],['หักค่าลดหย่อน',-S.allow],['เงินได้สุทธิ',S.net],['ภาษีตามขั้นบันได',S.tax],['หักภาษี ณ ที่จ่าย',-wh]].map(([a,b])=>`<div class="kv"><span>${a}</span><b>${b<0?'−':''}${f(Math.abs(b))}</b></div>`).join('');
+ try{localStorage.setItem('tb1',JSON.stringify({incs}))}catch(e){}
+ opt();riskc();
 }
-function fit(s,c){
- const need=Math.max(s.walk,s.prep)+s.walk+3;
- return {need:Math.round(need),slack:Math.round(c.cmin-need),ok:s.dist<=S.rad&&c.cmin>=need};
+const NAMES={rmf:{l:'RMF ตราสารหนี้/ตลาดเงิน',m:'RMF กองทุนผสม',h:'RMF หุ้นไทย/ต่างประเทศ'},ssf:{l:'SSF ตราสารหนี้',m:'SSF กองทุนผสม',h:'SSF หุ้น'},pension:{l:'ประกันบำนาญ',m:'ประกันบำนาญ',h:'ประกันบำนาญ'},life:{l:'ประกันชีวิตสะสมทรัพย์',m:'ประกันชีวิต',h:'ประกันชีวิต'},health:{l:'ประกันสุขภาพ',m:'ประกันสุขภาพ',h:'ประกันสุขภาพ'},home:{l:'ดอกเบี้ยบ้าน',m:'ดอกเบี้ยบ้าน',h:'ดอกเบี้ยบ้าน'}};
+function opt(){
+ const S=state(),k=$('#oType').value,v=num('#oAmt'),rm=room(S,k),use=Math.min(v,rm);
+ const save=S.tax-state({k,v:use}).tax;
+ $('#oRes').innerHTML=!S.gross?'ใส่รายได้ในแท็บ “คำนวณภาษี” ก่อน':(use<v?`สิทธิ์เหลืออีก <b>${f(rm)}</b> บาท ลงเต็มสิทธิ์ประหยัดได้<br><b>${f(save)} บาท</b>`:`ลงเพิ่ม ${f(v)} บาท ประหยัดภาษีได้<br><b>${f(save)} บาท</b>`+(use?`<br><small>คิดเป็น ${Math.round(save/use*100)}% ของเงินที่ลง</small>`:''));
+ const mr=S.parts.length?S.parts[S.parts.length-1].r:0,rk=$('#risk').value;
+ const list=Object.keys(NAMES).map(x=>({x,r:room(S,x)})).filter(o=>o.r>0).sort((a,b)=>b.r-a.r);
+ $('#room').innerHTML=S.gross?(mr==0?'<p class="sub">ตอนนี้คุณไม่มีภาษีต้องจ่าย การลดหย่อนเพิ่มจึงยังไม่ช่วยประหยัด</p>':'')+list.map(o=>{const mx=S.max[o.x],pc=mx?Math.min(100,(1-o.r/mx)*100):0;return `<div style="margin-bottom:14px"><div class="kv" style="border:0;padding:0"><b>${NAMES[o.x][rk]}</b><span>เหลือ ${f(o.r)}</span></div><div class="meter"><i style="width:${pc}%;background:var(--acc)"></i></div><span class="hint">ลงเต็มสิทธิ์ ประหยัดได้ไม่เกิน ${f(state().tax-state({k:o.x,v:o.r}).tax)} บาท</span></div>`}).join(''):'<p class="sub">กรอกรายได้ในแท็บแรกก่อน</p>';
 }
-function drawMap(){
- const c=calc(),st=ST[S.si];
- let h=`<defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="var(--line)" stroke-width=".6" opacity=".5"/></pattern></defs><rect width="800" height="520" fill="url(#g)"/>
- <g fill="none" stroke="var(--road)" stroke-linecap="round" stroke-linejoin="round"><path d="M0 470C200 440 260 300 300 215S520 120 800 150" stroke-width="16"/><path d="M290 0V520" stroke-width="9"/><path d="M80 120C300 150 450 260 540 400S700 500 800 480" stroke-width="12"/><path d="M0 250H800" stroke-width="7"/><path d="M610 0V520" stroke-width="8"/></g>
- <rect x="40" y="300" width="150" height="90" rx="14" fill="var(--line)" opacity=".5"/><rect x="680" y="270" width="90" height="110" rx="14" fill="var(--line)" opacity=".5"/><rect x="330" y="20" width="110" height="70" rx="14" fill="var(--line)" opacity=".5"/><ellipse cx="130" cy="80" rx="95" ry="42" fill="#8fd0ea" opacity=".55"/><rect x="360" y="300" width="130" height="80" rx="16" fill="var(--tealS)" opacity=".85"/><text x="425" y="345" text-anchor="middle" font-size="13" fill="var(--teal)" font-family="Prompt">สวนสาธารณะ</text>
- <path d="M${CAR.x} ${CAR.y}L${st.x} ${st.y}" stroke="var(--sun)" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
- <circle class="ring" cx="${st.x}" cy="${st.y}" r="${S.rad/M_PER_PX}" fill="var(--teal)" fill-opacity=".14" stroke="var(--teal)" stroke-width="2.5" stroke-dasharray="10 8"/>
- <text x="${st.x}" y="${st.y+S.rad/M_PER_PX+16}" text-anchor="middle" font-size="17" font-weight="600" fill="var(--teal)" font-family="Prompt">เดินได้ ${S.rad} ม.</text>`;
- if(S.shop!=null){const s=SH[S.shop];h+=`<path d="M${st.x} ${st.y}L${s.x} ${s.y}" stroke="var(--hot)" stroke-width="3.5" stroke-dasharray="6 6"/>`}
- SH.forEach(s=>{const inr=s.si==S.si&&s.dist<=S.rad,sel=S.shop==s.id;
-  h+=`<g class="pin" data-shop="${s.id}" opacity="${inr?1:.35}" tabindex="0" role="button" aria-label="${s.n}"><circle cx="${s.x}" cy="${s.y}" r="${sel?19:15}" fill="var(--hot)" stroke="var(--card)" stroke-width="3"/><text x="${s.x}" y="${s.y+6}" text-anchor="middle" font-size="${sel?20:16}">${s.e}</text></g>`});
- ST.forEach((t,i)=>{const on=i==S.si;
-  h+=`<g class="pin" data-st="${i}" tabindex="0" role="button" aria-label="${t.n}"><circle class="pulse" cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)"/><circle cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)" stroke="var(--card)" stroke-width="4"/><text x="${t.x}" y="${t.y+8}" text-anchor="middle" font-size="${on?24:19}">⚡</text><text x="${t.x}" y="${t.y-32}" text-anchor="middle" font-size="17" font-weight="600" fill="var(--ink)" stroke="var(--map)" stroke-width="4" paint-order="stroke" font-family="Prompt">${t.n.split(" ").slice(0,2).join(" ")} ${t.kw}kW</text></g>`});
- h+=`<g><circle cx="${CAR.x}" cy="${CAR.y}" r="20" fill="var(--sun)" stroke="var(--card)" stroke-width="3"/><text x="${CAR.x}" y="${CAR.y+7}" text-anchor="middle" font-size="20">🚗</text></g>`;
- $("#map").innerHTML=h;
+function riskc(){
+ const m=Math.max(1,Math.min(12,num('#mon')||1)),k=12/m;
+ const tx=num('#etx')*k,am=num('#eam')*k,rv=num('#rev')*k;
+ const lv=p=>p>=1?['bd','เกินเกณฑ์']:p>=.7?['wn','ใกล้เกณฑ์']:['ok','ปลอดภัย'],cl=p=>p>=1?'var(--bad)':p>=.7?'var(--warn)':'var(--acc)';
+ const row=(t,cur,lim,u,note)=>{const p=cur/lim,[c,l]=lv(p);return `<div style="margin-bottom:18px"><div class="kv" style="border:0;padding:0"><b>${t}</b><span class="pill ${c}">${l}</span></div><div class="meter"><i style="width:${Math.min(100,p*100)}%;background:${cl(p)}"></i></div><span class="hint">ประมาณทั้งปี ${f(cur)} / ${f(lim)} ${u} (${Math.round(p*100)}%)${note?'<br>'+note:''}</span></div>`};
+ const both=Math.min(tx/400,am/2e6);
+ $('#riskOut').innerHTML='<h2>ผลประเมินทั้งปี</h2><p class="sub">คำนวณจากอัตราปัจจุบัน × '+k.toFixed(1)+'</p>'+
+ row('เงินโอนเข้า: จำนวนครั้ง',tx,3000,'ครั้ง','เกณฑ์ที่ 1: ถึง 3,000 ครั้งต่อปี')+
+ `<div style="margin-bottom:18px"><div class="kv" style="border:0;padding:0"><b>เงินโอนเข้า: 400 ครั้ง และ 2 ล้านบาท</b><span class="pill ${lv(both)[0]}">${lv(both)[1]}</span></div><div class="meter"><i style="width:${Math.min(100,both*100)}%;background:${cl(both)}"></i></div><span class="hint">ต้องถึงทั้งสองข้อ · ครั้ง ${f(tx)}/400 · ยอด ${f(am)}/2,000,000</span></div>`+
+ row('ยอดขายเทียบเกณฑ์ VAT',rv,1.8e6,'บาท',rv>=1.8e6?'ต้องจดทะเบียน VAT ภายใน 30 วันนับจากวันที่รายได้เกินเกณฑ์':'ควรเตรียมเอกสารและบัญชีก่อนถึงเกณฑ์')+
+ '<p class="hint">ถูกรายงานไม่ได้แปลว่าต้องเสียภาษีเพิ่ม แต่ควรเก็บหลักฐานรายรับ–รายจ่ายไว้ให้พร้อมชี้แจง</p>';
 }
-function drawPanel(){
- const c=calc();
- $("#socO").textContent=S.soc+"%";$("#radO").textContent=S.rad+" ม.";
- $("#calc").innerHTML=`<div class="stats"><div class="stat"><small>ถึงสถานีใน</small><b>${Math.round(c.tmin)} นาที</b></div><div class="stat"><small>แบตตอนถึง</small><b style="color:${c.arr<12?"var(--hot)":"inherit"}">${Math.round(c.arr)}%</b></div><div class="stat"><small>ชาร์จถึง 80%</small><b>${c.cmin} นาที</b></div></div><small style="color:var(--mute)">${c.st.n} · ระยะ ${c.km.toFixed(1)} กม. · รถรับกำลังได้สูงสุด ${c.kw} kW${c.arr<12?" · แบตต่ำ ควรไปสถานีใกล้กว่า":""}</small>`;
- const list=SH.filter(s=>s.si==S.si).map(s=>({s,f:fit(s,c)})).sort((a,b)=>a.s.dist-b.s.dist);
- $("#shops").innerHTML=list.length?list.map(({s,f})=>`<button class="shop" data-shop="${s.id}" aria-pressed="${S.shop==s.id}" ${f.ok?"":'style="opacity:.75"'}><span class="e">${s.e}</span><span class="m"><b>${s.n}</b><small>เดิน ${s.dist} ม. (${Math.ceil(s.walk)} นาที) · รอทำ ${s.prep} นาที</small></span><span class="badge ${f.ok?"ok":"no"}">${s.dist>S.rad?"ไกลเกินรัศมี":f.ok?"ทัน +"+f.slack+" นาที":"ไม่ทัน"}</span></button>`).join(""):`<div class="empty">ไม่มีร้านในสถานีนี้</div>`;
- drawOrder();
+$$('nav button').forEach(b=>b.onclick=()=>{$$('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));['calc','opt','risk-s','ai'].forEach(id=>$('#'+id).hidden=id!==b.dataset.t);window.scrollTo(0,0)});
+$('#incs').addEventListener('input',e=>{const d=e.target.dataset;if(d.k=='v')incs[d.i].v=parseFloat(e.target.value)||0;else if(d.k=='t')incs[d.i].t=e.target.value;calc()});
+$('#incs').addEventListener('click',e=>{const i=e.target.dataset.del;if(i!=null){incs.splice(i,1);renderIncs();calc()}});
+$('#addInc').onclick=()=>{incs.push({t:'f',v:0});renderIncs();calc()};
+$$('input:not(#ci):not([data-k]),select:not([data-k])').forEach(el=>el.addEventListener('input',calc));
+const KB=[
+ [/ต้องยื่น|ยื่นไหม|เกณฑ์ขั้นต่ำ/,'ผู้มีเงินได้เงินเดือน (40(1)) เกิน 120,000 บาทต่อปี (โสด) หรือ 220,000 บาท (คู่สมรสมีเงินได้) ต้องยื่น ส่วนเงินได้ประเภทอื่นเกิน 60,000 บาทก็ต้องยื่น ถ้าถูกหัก ณ ที่จ่ายไว้ แม้ไม่ถึงเกณฑ์ ก็ยื่นเพื่อขอคืนได้'],
+ [/ย้อนหลัง|กลัว|เบี้ยปรับ/,'การยื่นภาษีไม่ได้ทำให้ถูกเรียกเก็บย้อนหลังโดยอัตโนมัติ ภาษีย้อนหลังเกิดจากรายได้ที่ควรยื่นแต่ไม่ได้ยื่น ถ้าเคยพลาด การยื่นเพิ่มเองก่อนถูกแจ้งมักเสียเงินเพิ่มน้อยกว่า'],
+ [/vat|แวต|1\.8/i,'ถ้ารายได้จากขายสินค้า/บริการเกิน 1.8 ล้านบาทต่อปี ต้องจดทะเบียน VAT ภายใน 30 วัน ลองดูแท็บ “เฝ้าระวังความเสี่ยง”'],
+ [/e-?payment|โอนเข้า|3,?000/i,'สถาบันการเงินรายงานสรรพากรเมื่อเงินเข้าบัญชีถึง 3,000 ครั้งต่อปี หรือ 400 ครั้งขึ้นไปและรวม 2 ล้านบาทขึ้นไป ไม่ได้แปลว่าต้องเสียภาษีทันที แต่ควรเก็บหลักฐานไว้'],
+ [/rmf|ssf|กองทุน/i,'RMF ลดหย่อนได้ 30% ของรายได้ ไม่เกิน 500,000 บาท ส่วน SSF 30% ไม่เกิน 200,000 บาท รวมกองทุนเกษียณทั้งหมดไม่เกิน 500,000 บาท และต้องถือครองตามเงื่อนไข'],
+ [/ประกัน/,'เบี้ยประกันชีวิตลดหย่อนไม่เกิน 100,000 บาท ประกันสุขภาพไม่เกิน 25,000 บาท (รวมกันไม่เกิน 100,000) ประกันบำนาญ 15% ของรายได้ ไม่เกิน 200,000 บาท'],
+ [/50 ?ทวิ|หัก ณ ที่จ่าย/,'ใบ 50 ทวิ คือหลักฐานว่าถูกหักภาษีไว้แล้ว นำยอดมากรอกช่อง “ภาษีที่ถูกหัก ณ ที่จ่าย” ในแท็บแรก ถ้าหักไว้เกินภาษีจริงจะได้คืน'],
+ [/ฟรีแลนซ์|ค่าใช้จ่าย|เหมา/,'ในแอปนี้ เงินเดือนและรับจ้างหักเหมา 50% ไม่เกิน 100,000 บาท (รวมกัน) ส่วนขายของ/ธุรกิจ 40(8) ใช้เหมา 60% เป็นค่าประมาณ บางประเภทกิจการอัตราไม่เท่ากัน หรืออาจหักตามจริงถ้ามีหลักฐาน']
+];
+const chat=$('#chat');
+function say(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function ans(q){
+ if(/ภาษีของฉัน|ต้องจ่าย|เท่าไหร่|คืน/.test(q)){const S=state(),d=S.tax-num('#wh');return S.gross?`จากข้อมูลที่กรอก เงินได้สุทธิ ${f(S.net)} บาท ภาษี ${f(S.tax)} บาท`+(d<0?` คุณได้คืนประมาณ ${f(-d)} บาท`:` ต้องจ่ายเพิ่มประมาณ ${f(d)} บาท`):'ยังไม่มีรายได้ในระบบ ไปกรอกที่แท็บ “คำนวณภาษี” ก่อนนะ'}
+ for(const[re,a]of KB)if(re.test(q))return a;
+ return 'ตอนนี้ตอบได้เรื่อง: เกณฑ์ต้องยื่น, ภาษีย้อนหลัง, VAT 1.8 ล้าน, e-Payment, RMF/SSF, ประกัน, 50 ทวิ, ค่าใช้จ่ายเหมา และภาษีของคุณ ลองพิมพ์ด้วยคำเหล่านี้ได้เลย';
 }
-function qr(code){let h=0;for(const ch of code)h=(h*31+ch.charCodeAt(0))>>>0;const n=21,u=100/n;let r="";
- const fin=(x,y)=>(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);
- for(let y=0;y<n;y++)for(let x=0;x<n;x++){let on;if(fin(x,y)){const a=x%14,b=y%14;const m=Math.max(Math.abs((x<7?x:x-14)-3),Math.abs((y<7?y:y-14)-3));on=m!=2&&m<4}else{h=(h*1103515245+12345)>>>0;on=(h>>>16)&1}
-  if(on)r+=`<rect x="${x*u}" y="${y*u}" width="${u+.4}" height="${u+.4}"/>`}
- return `<svg class="qr" viewBox="0 0 100 100" fill="#12263a" role="img" aria-label="QR ${code}">${r}</svg>`}
-function drawOrder(){
- const card=$("#orderCard");const mine=S.orders.find(o=>o.status=="pending"&&o.mine);
- if(mine){const s=SH[mine.shop];card.hidden=false;card.innerHTML=`<h3>QR ส่วนลดของคุณ</h3><div class="row" style="margin:0"><b class="pr">${s.e} ${s.n}</b><span class="pill">ลด 10% สำหรับ EV</span></div>${qr(mine.code)}<div style="text-align:center"><div class="big">${baht(mine.total)}</div><small style="color:var(--mute)">รหัส ${mine.code} · ยื่น QR นี้ให้ร้านสแกน</small></div><div class="timer" style="margin-top:12px"><div class="t" id="tt">--:--</div><div style="flex:1"><div style="font-size:13px">เวลารถชาร์จเสร็จ</div><div class="bar"><i id="tb"></i></div></div></div><button class="btn alt" id="startC" style="margin-top:10px" ${timer?"disabled":""}>${timer?"กำลังชาร์จ...":"เริ่มชาร์จ (เดโมเร็ว ×30)"}</button><button class="btn ghost" id="cancelO" style="margin-top:8px">ยกเลิกออเดอร์</button>`;return}
- if(S.shop==null){card.hidden=true;return}
- const s=SH[S.shop],c=calc(),f=fit(s,c),tot=Math.round(s.price*0.9);
- card.hidden=false;
- card.innerHTML=`<h3>${s.e} ${s.n}</h3><p style="margin:0 0 8px;color:var(--mute)">${s.item} · ปกติ ${baht(s.price)} → <b style="color:var(--hot)">${baht(tot)}</b> ด้วยส่วนลด EV</p><div class="tl">${[["เดินไป",Math.ceil(s.walk),"var(--teal)"],["รอร้าน",Math.max(0,s.prep-Math.ceil(s.walk)),"#e0a000"],["เดินกลับ",Math.ceil(s.walk),"var(--teal)"],["รับของ",3,"var(--hot)"],["เหลือ",Math.max(0,f.slack),"var(--line)"]].filter(x=>x[1]>0).map(x=>`<i style="flex:${x[1]};background:${x[2]}" title="${x[0]} ${x[1]} นาที"><span>${x[0]}</span></i>`).join("")}</div><div class="tll"><span>เสียบปลั๊ก</span><span>ชาร์จเสร็จ ${c.cmin} นาที</span></div><p style="margin:0 0 10px;font-size:14px">${f.ok?`✅ ร้านเริ่มทำตอนคุณเสียบปลั๊ก เดินไปถึงของพร้อมพอดี เหลือเวลาอีก ${f.slack} นาทีก่อนรถชาร์จเสร็จ`:`⚠️ เวลาไม่พอ ลองเพิ่มรัศมี เลือกร้านที่ทำเร็วกว่า หรือเลือกสถานีอื่น`}</p><button class="btn" id="order" ${f.ok?"":"disabled"}>สั่งล่วงหน้า รับ QR ส่วนลด</button>`;
-}
-function tick(){const t=$("#tt");if(!t)return;const m=Math.floor(tleft/60),s=Math.floor(tleft%60);t.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");const b=$("#tb");if(b)b.style.width=(100*(1-tleft/ttotal))+"%"}
-function startCharge(){const c=calc();ttotal=tleft=c.cmin*60;clearInterval(timer);timer=setInterval(()=>{tleft-=30;if(tleft<=0){tleft=0;clearInterval(timer);timer=null;toast("🔋 ชาร์จถึง 80% แล้ว ไปรับรถได้เลย");}tick()},1000);drawOrder();tick()}
-
-function merchant(){
- const id=+$("#myshop").value,s=SH[id],os=S.orders.filter(o=>o.shop==id);
- const done=os.filter(o=>o.status=="done"),pend=os.filter(o=>o.status=="pending");
- $("#rev").textContent=baht(done.reduce((a,o)=>a+o.total,0));$("#cnt").textContent=done.length;$("#pend").textContent=pend.length;
- $("#orders").innerHTML=os.length?os.slice().reverse().map(o=>`<div class="ord"><div><b class="pr">#${o.code}</b><br><small style="color:var(--mute)">${s.item} · ${baht(o.total)}</small></div>${o.status=="done"?'<span class="badge ok">รับเงินแล้ว</span>':`<button class="btn" style="width:auto;padding:8px 14px" data-ok="${o.code}">ยืนยัน</button>`}</div>`).join(""):`<div class="empty">ยังไม่มีออเดอร์ ไปที่แท็บ "คนขับ EV" แล้วลองสั่งสักรายการ</div>`;
- const n=S.cpd,gross=n*30*S.pf,fee=S.plan=="free"?gross*0.08/ (1) *(S.plan=="free"?1:0):199,net=gross-fee,be=Math.ceil(199/S.pf);
- const paying=S.plan=="free"?gross*0.08:199;
- $("#cpdO").textContent=n+" คน";$("#pfO").textContent=baht(S.pf);
- $("#roi").innerHTML=`<div class="stats" style="grid-template-columns:1fr 1fr"><div class="stat"><small>กำไรเพิ่มต่อเดือน</small><b>${baht(gross)}</b></div><div class="stat"><small>ค่าบริการ</small><b>${baht(paying)}</b></div></div><div class="big" style="color:${gross-paying>=0?"var(--teal)":"var(--hot)"}">สุทธิ ${baht(gross-paying)}/เดือน</div><p style="color:var(--mute);margin:6px 0 0;font-size:14px">ค่ารายเดือน ฿199 (วันละ ~฿6.6) คืนทุนเมื่อมีลูกค้า EV ${be} คน/เดือน (ประมาณ ${(be/30).toFixed(1)} คน/วัน) แพ็กเกจเริ่มฟรีไม่มีความเสี่ยง จ่ายเมื่อเกิดยอดขายจริงเท่านั้น</p>`;
-}
-function confirmOrder(code){
- const o=S.orders.find(x=>x.code==code);if(!o||o.status!="pending")return;
- o.status="done";S.stamps[o.shop]=(S.stamps[o.shop]||0)+1;save();
- if(o.mine&&timer==null)drawOrder();
- toast(`💰 รับเงิน ${baht(o.total)} เข้าร้านแล้ว · ลูกค้าได้แสตมป์ ${SH[o.shop].e}`);merchant();drawOrder();pass();
-}
-function pass(){
- const got=Object.keys(S.stamps).length;const dn=S.orders.filter(o=>o.status=="done");$("#impact").innerHTML=`<div class="stat"><small>เงินสู่ร้านชุมชน</small><b>${baht(dn.reduce((a,o)=>a+o.total,0))}</b></div><div class="stat"><small>ออเดอร์</small><b>${dn.length}</b></div><div class="stat"><small>ร้านที่ได้ลูกค้า</small><b>${got}</b></div>`;$("#stc").textContent=got+" / "+SH.length+" ร้าน";
- $("#stamps").innerHTML=SH.map(s=>`<div class="stamp ${S.stamps[s.id]?"got":""}" title="${s.n}">${s.e}<small>${s.n.slice(0,9)}</small></div>`).join("");
- $("#rewards").innerHTML=REW.map(r=>{const un=got>=r.n,u=S.used.includes(r.n);return `<div class="rew ${un&&!u?"un":""}"><div class="need">${r.n}</div><div style="flex:1"><b class="pr">${r.t}</b><br><small style="color:var(--mute)">${un?(u?"ใช้แล้ว":"ปลดล็อกแล้ว"):"ต้องสะสมอีก "+(r.n-got)+" ร้าน"}</small></div><button class="btn alt" style="width:auto;padding:8px 14px" data-rw="${r.n}" ${un&&!u?"":"disabled"}>${u?"✓":"แลก"}</button></div>`}).join("");
-}
-function render(){drawMap();drawPanel();merchant();pass()}
-
-/* events */
-$$("nav button").forEach(b=>b.onclick=()=>{$$("nav button").forEach(x=>x.setAttribute("aria-selected",x==b));$$("section").forEach(s=>s.hidden=s.id!=b.dataset.tab);merchant();pass()});
-$("#soc").oninput=e=>{S.soc=+e.target.value;S.shop=null;render()};
-$("#rad").oninput=e=>{S.rad=+e.target.value;render()};
-$("#traffic").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tr=+b.dataset.v;$$("#traffic button").forEach(x=>x.setAttribute("aria-pressed",x==b));render()};
-$("#cpd").oninput=e=>{S.cpd=+e.target.value;merchant()};
-$("#pf").oninput=e=>{S.pf=+e.target.value;merchant()};
-$("#plan").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.plan=b.dataset.v;$$("#plan button").forEach(x=>x.setAttribute("aria-pressed",x==b));merchant()};
-$("#map").onclick=e=>{const g=e.target.closest("[data-st],[data-shop]");if(!g)return;if(g.dataset.st!=null){S.si=+g.dataset.st;S.shop=null}else{const s=SH[+g.dataset.shop];S.si=s.si;S.shop=s.id}render()};
-$("#map").onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))}};
-$("#shops").onclick=e=>{const b=e.target.closest("[data-shop]");if(!b)return;S.shop=+b.dataset.shop;render()};
-$("#orderCard").onclick=e=>{
- if(e.target.id=="order"){const s=SH[S.shop],c=calc();const code="EV"+String(1000+S.seq++);S.orders.push({code,shop:s.id,total:Math.round(s.price*0.9),status:"pending",mine:true});save();toast("สั่งแล้ว ร้านเริ่มเตรียมของให้ ✔");drawOrder();merchant()}
- if(e.target.id=="startC")startCharge();
- if(e.target.id=="cancelO"){S.orders=S.orders.filter(o=>!(o.mine&&o.status=="pending"));clearInterval(timer);timer=null;save();drawOrder();merchant()}};
-$("#myshop").innerHTML=SH.map(s=>`<option value="${s.id}">${s.e} ${s.n}</option>`).join("");
-$("#myshop").onchange=merchant;
-$("#orders").onclick=e=>{const b=e.target.closest("[data-ok]");if(b)confirmOrder(b.dataset.ok)};
-$("#scanBtn").onclick=()=>{
- const id=+$("#myshop").value,o=S.orders.find(x=>x.shop==id&&x.status=="pending"),sc=$("#scan");
- if(!o){$("#scanTxt").textContent="ยังไม่มีออเดอร์รอสแกน ลองสั่งจากแท็บ \"คนขับ EV\" ก่อน";return}
- sc.classList.add("on");$("#scanTxt").textContent="กำลังสแกน "+o.code+"...";$("#scanBtn").disabled=true;
- setTimeout(()=>{sc.classList.remove("on");$("#scanTxt").innerHTML="✅ สำเร็จ "+baht(o.total)+"<br><small>รหัส "+o.code+"</small>";$("#scanBtn").disabled=false;confirmOrder(o.code)},1300)};
-$("#rewards").onclick=e=>{const b=e.target.closest("[data-rw]");if(!b)return;S.used.push(+b.dataset.rw);save();toast("🎉 แลกรางวัลสำเร็จ แสดงหน้าจอนี้ที่ร้านหรือสถานีชาร์จ");pass()};
-$("#reset").onclick=()=>{S.orders=[];S.stamps={};S.used=[];S.shop=null;clearInterval(timer);timer=null;save();render();toast("ล้างข้อมูลเดโมแล้ว")};
-$("#theme").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark";render()};
-$("#soc").value=S.soc;$("#rad").value=S.rad;
-const go=t=>$(`nav button[data-tab=${t}]`).click(),wt=ms=>new Promise(r=>setTimeout(r,ms));
-$("#logo").onclick=()=>go("home");$("#goTry").onclick=()=>go("b2c");
-$("#goDemo").onclick=async()=>{
- S.orders=S.orders.filter(o=>!(o.mine&&o.status=="pending"));clearInterval(timer);timer=null;
- S.si=0;S.soc=24;S.rad=300;S.tr=1;$("#soc").value=24;$("#rad").value=300;
- const sh=SH.filter(s=>s.si==0).find(s=>fit(s,calc()).ok)||SH[1];S.shop=sh.id;
- go("b2c");render();toast("1/4 เลือกสถานี แล้วหาร้านที่เดินไปทัน");await wt(2600);
- const o=$("#order");if(o){o.click();toast("2/4 สั่งล่วงหน้า ได้ QR ส่วนลด")}await wt(2200);
- const sc=$("#startC");if(sc)sc.click();toast("3/4 เริ่มชาร์จ นับถอยหลังเวลา");await wt(2600);
- $("#myshop").value=sh.id;go("b2b");toast("4/4 ร้านค้าสแกน QR รับเงินทันที");await wt(1400);$("#scanBtn").click();await wt(3200);
- go("pass");toast("🏅 ลูกค้าได้แสตมป์ ร้านได้ยอดขาย");
-};
-$$("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab=="home"));
-$$("#traffic button").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.v==S.tr));
-$$("#plan button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v==S.plan));
-$("#cpd").value=S.cpd;$("#pf").value=S.pf;
-render();
+function ask(q){say(q,'u');setTimeout(()=>say(ans(q),'b'),250)}
+$('#cf').onsubmit=e=>{e.preventDefault();const q=$('#ci').value.trim();if(q){ask(q);$('#ci').value=''}};
+$('#chips').innerHTML=['ต้องยื่นภาษีไหม','ภาษีของฉันเท่าไหร่','VAT 1.8 ล้านคืออะไร','RMF กับ SSF','กลัวโดนภาษีย้อนหลัง'].map(t=>`<button type="button">${t}</button>`).join('');
+$('#chips').onclick=e=>{if(e.target.tagName=='BUTTON')ask(e.target.textContent)};
+say('สวัสดี ถามเรื่องภาษีได้เลย เริ่มจากกดหัวข้อด้านล่างก็ได้','b');
+renderIncs();calc();
 </script>
 </body>
 </html>
