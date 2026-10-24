@@ -128,15 +128,23 @@ svg.map{background:var(--map)}
 .stamp.got{box-shadow:0 8px 18px -6px rgba(242,84,45,.5)}
 .rew{border-radius:18px}
 @media(max-width:700px){.tag{display:none}.hero{padding:24px 20px;border-radius:26px}nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;justify-content:space-around;box-shadow:0 14px 36px rgba(0,0,0,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:color-mix(in srgb,var(--card) 88%,transparent)}nav button{flex:1;padding:12px 4px}body{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}.toast{bottom:100px}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.grid3 b{font:800 44px/1 Prompt;color:var(--teal);display:block;margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+.steps div{background:var(--bg);border-radius:18px;padding:14px;font-size:14px}.steps b{display:block;font:600 15px Prompt;margin:4px 0}.steps span{font-size:30px}
+.cta{position:relative;display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.cta .btn{width:auto;padding:14px 26px;font-size:17px}
+.hero .btn.ghost{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.35)}
+@media(max-width:700px){.grid3,.steps{grid-template-columns:1fr 1fr}.grid3>.card:first-child{grid-column:1/-1}}
+@media(min-width:901px){#b2c .grid,#b2b .grid,#pass .grid{display:flex;flex-direction:column;align-items:stretch;gap:14px;width:470px;max-width:100%;margin:0 auto 30px;padding:34px 14px 18px;border:11px solid #0b1b2b;border-radius:56px;background:var(--bg);box-shadow:0 40px 80px -30px rgba(5,43,54,.6);max-height:800px;overflow-y:auto;scrollbar-width:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
- <div class="logo"><i>⚡</i>EV-Route<b>X</b></div>
+ <div class="logo" id="logo" style="cursor:pointer"><i>⚡</i>EV-Route<b>X</b></div>
  <div class="tag">รอชาร์จ 30 นาที ให้เป็นเวลาอุดหนุนร้านชุมชนรอบสถานี</div>
  <nav role="tablist" aria-label="เมนูหลัก">
-  <button role="tab" aria-selected="true" data-tab="b2c">🚗 คนขับ EV</button>
+  <button role="tab" aria-selected="true" data-tab="home">🏠 หน้าแรก</button><button role="tab" aria-selected="false" data-tab="b2c">🚗 คนขับ EV</button>
   <button role="tab" aria-selected="false" data-tab="b2b">🏪 ร้านค้าชุมชน</button>
   <button role="tab" aria-selected="false" data-tab="pass">🎫 KMITL Passport</button>
  </nav>
@@ -144,7 +152,12 @@ svg.map{background:var(--map)}
 </header>
 
 <!-- B2C -->
-<section id="b2c" role="tabpanel">
+<section id="home" role="tabpanel">
+ <div class="hero"><h1>รอชาร์จ 30 นาที ร้านข้างๆ ไม่มีลูกค้า</h1><p>EV-RouteX เปลี่ยนเวลารอชาร์จของคนขับ EV ให้เป็นรายได้ของร้านชุมชนในรัศมีเดินถึง คำนวณให้ด้วยว่าเดินไปกลับและรอทำอาหารทันก่อนรถชาร์จเสร็จ</p><div class="cta"><button class="btn" id="goDemo">▶ ดูเดโมอัตโนมัติ</button><button class="btn ghost" id="goTry">ลองใช้เอง</button></div></div>
+ <div class="grid3"><div class="card"><b>30 นาที</b>เวลาที่คนขับ EV นั่งรอชาร์จที่ปั๊ม</div><div class="card"><b>200 ม.</b>ร้านชุมชนอยู่ห่างแค่นี้ แต่ไม่มีใครรู้</div><div class="card"><b>฿6/วัน</b>ค่าบริการร้านค้า คืนทุนเมื่อมีลูกค้าเดือนละ 4 คน</div></div>
+ <div class="card"><h3>ทำงานอย่างไร</h3><div class="steps"><div><span>🔌</span><b>เสียบปลั๊ก</b>ระบบคำนวณแบตและเวลาชาร์จ</div><div><span>🧭</span><b>จับคู่ร้าน</b>เลือกร้านที่เดินไปกลับทัน</div><div><span>🎫</span><b>สั่งล่วงหน้า</b>ได้ QR ส่วนลด ร้านเตรียมของรอ</div><div><span>🏅</span><b>สะสมแสตมป์</b>ร้านสแกน เงินเข้าทันที</div></div></div>
+</section>
+<section id="b2c" role="tabpanel" hidden>
  <div class="hero"><h1>เลือกสถานีชาร์จ แล้วดูว่า 30 นาทีนี้ เดินไปกินอะไรทันบ้าง</h1><p>แตะหมุดสถานีบนแผนที่ ระบบคำนวณแบตตอนถึง เวลาชาร์จ และเลือกร้านที่เดินไปกลับ+รอทำอาหารทันก่อนรถชาร์จเสร็จ</p><div class="chips"><span>⚡ คำนวณแบตตามจราจร</span><span>🚶 รัศมีเดิน 100–300 ม.</span><span>🎫 สั่งล่วงหน้า รับ QR</span></div></div>
  <div class="grid">
   <div class="card mapbox">
@@ -200,7 +213,7 @@ svg.map{background:var(--map)}
 <section id="pass" role="tabpanel" hidden>
  <div class="hero"><h1>KMITL Passport: ยิ่งแวะร้านรอบจุดชาร์จ ยิ่งได้ส่วนลด</h1><p>ทุกครั้งที่ร้านสแกนออเดอร์ของคุณสำเร็จ จะได้แสตมป์ดิจิทัลของร้านนั้น สะสมครบแล้วแลกส่วนลดค่าชาร์จหรือร้านถัดไป</p></div>
  <div class="grid">
-  <div class="card"><div class="row"><h3>แสตมป์ของฉัน</h3><span class="pill" id="stc"></span></div><div class="stamps" id="stamps" style="padding-bottom:20px"></div></div>
+  <div class="card"><div class="stats" id="impact"></div><div class="row"><h3>แสตมป์ของฉัน</h3><span class="pill" id="stc"></span></div><div class="stamps" id="stamps" style="padding-bottom:20px"></div></div>
   <div class="card"><h3>รางวัล</h3><div id="rewards"></div><button class="btn ghost" id="reset" style="margin-top:8px">ล้างข้อมูลเดโม</button></div>
  </div>
 </section>
@@ -253,12 +266,12 @@ function drawMap(){
  <rect x="40" y="300" width="150" height="90" rx="14" fill="var(--line)" opacity=".5"/><rect x="680" y="270" width="90" height="110" rx="14" fill="var(--line)" opacity=".5"/><rect x="330" y="20" width="110" height="70" rx="14" fill="var(--line)" opacity=".5"/><ellipse cx="130" cy="80" rx="95" ry="42" fill="#8fd0ea" opacity=".55"/><rect x="360" y="300" width="130" height="80" rx="16" fill="var(--tealS)" opacity=".85"/><text x="425" y="345" text-anchor="middle" font-size="13" fill="var(--teal)" font-family="Prompt">สวนสาธารณะ</text>
  <path d="M${CAR.x} ${CAR.y}L${st.x} ${st.y}" stroke="var(--sun)" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
  <circle class="ring" cx="${st.x}" cy="${st.y}" r="${S.rad/M_PER_PX}" fill="var(--teal)" fill-opacity=".14" stroke="var(--teal)" stroke-width="2.5" stroke-dasharray="10 8"/>
- <text x="${st.x}" y="${st.y+S.rad/M_PER_PX+16}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--teal)" font-family="Prompt">เดินได้ ${S.rad} ม.</text>`;
+ <text x="${st.x}" y="${st.y+S.rad/M_PER_PX+16}" text-anchor="middle" font-size="17" font-weight="600" fill="var(--teal)" font-family="Prompt">เดินได้ ${S.rad} ม.</text>`;
  if(S.shop!=null){const s=SH[S.shop];h+=`<path d="M${st.x} ${st.y}L${s.x} ${s.y}" stroke="var(--hot)" stroke-width="3.5" stroke-dasharray="6 6"/>`}
  SH.forEach(s=>{const inr=s.si==S.si&&s.dist<=S.rad,sel=S.shop==s.id;
   h+=`<g class="pin" data-shop="${s.id}" opacity="${inr?1:.35}" tabindex="0" role="button" aria-label="${s.n}"><circle cx="${s.x}" cy="${s.y}" r="${sel?19:15}" fill="var(--hot)" stroke="var(--card)" stroke-width="3"/><text x="${s.x}" y="${s.y+6}" text-anchor="middle" font-size="${sel?20:16}">${s.e}</text></g>`});
  ST.forEach((t,i)=>{const on=i==S.si;
-  h+=`<g class="pin" data-st="${i}" tabindex="0" role="button" aria-label="${t.n}"><circle class="pulse" cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)"/><circle cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)" stroke="var(--card)" stroke-width="4"/><text x="${t.x}" y="${t.y+8}" text-anchor="middle" font-size="${on?24:19}">⚡</text><text x="${t.x}" y="${t.y-32}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)" stroke="var(--map)" stroke-width="4" paint-order="stroke" font-family="Prompt">${t.n.split(" ").slice(0,2).join(" ")} ${t.kw}kW</text></g>`});
+  h+=`<g class="pin" data-st="${i}" tabindex="0" role="button" aria-label="${t.n}"><circle class="pulse" cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)"/><circle cx="${t.x}" cy="${t.y}" r="${on?26:20}" fill="var(--teal)" stroke="var(--card)" stroke-width="4"/><text x="${t.x}" y="${t.y+8}" text-anchor="middle" font-size="${on?24:19}">⚡</text><text x="${t.x}" y="${t.y-32}" text-anchor="middle" font-size="17" font-weight="600" fill="var(--ink)" stroke="var(--map)" stroke-width="4" paint-order="stroke" font-family="Prompt">${t.n.split(" ").slice(0,2).join(" ")} ${t.kw}kW</text></g>`});
  h+=`<g><circle cx="${CAR.x}" cy="${CAR.y}" r="20" fill="var(--sun)" stroke="var(--card)" stroke-width="3"/><text x="${CAR.x}" y="${CAR.y+7}" text-anchor="middle" font-size="20">🚗</text></g>`;
  $("#map").innerHTML=h;
 }
@@ -303,7 +316,7 @@ function confirmOrder(code){
  toast(`💰 รับเงิน ${baht(o.total)} เข้าร้านแล้ว · ลูกค้าได้แสตมป์ ${SH[o.shop].e}`);merchant();drawOrder();pass();
 }
 function pass(){
- const got=Object.keys(S.stamps).length;$("#stc").textContent=got+" / "+SH.length+" ร้าน";
+ const got=Object.keys(S.stamps).length;const dn=S.orders.filter(o=>o.status=="done");$("#impact").innerHTML=`<div class="stat"><small>เงินสู่ร้านชุมชน</small><b>${baht(dn.reduce((a,o)=>a+o.total,0))}</b></div><div class="stat"><small>ออเดอร์</small><b>${dn.length}</b></div><div class="stat"><small>ร้านที่ได้ลูกค้า</small><b>${got}</b></div>`;$("#stc").textContent=got+" / "+SH.length+" ร้าน";
  $("#stamps").innerHTML=SH.map(s=>`<div class="stamp ${S.stamps[s.id]?"got":""}" title="${s.n}">${s.e}<small>${s.n.slice(0,9)}</small></div>`).join("");
  $("#rewards").innerHTML=REW.map(r=>{const un=got>=r.n,u=S.used.includes(r.n);return `<div class="rew ${un&&!u?"un":""}"><div class="need">${r.n}</div><div style="flex:1"><b class="pr">${r.t}</b><br><small style="color:var(--mute)">${un?(u?"ใช้แล้ว":"ปลดล็อกแล้ว"):"ต้องสะสมอีก "+(r.n-got)+" ร้าน"}</small></div><button class="btn alt" style="width:auto;padding:8px 14px" data-rw="${r.n}" ${un&&!u?"":"disabled"}>${u?"✓":"แลก"}</button></div>`}).join("");
 }
@@ -336,6 +349,19 @@ $("#rewards").onclick=e=>{const b=e.target.closest("[data-rw]");if(!b)return;S.u
 $("#reset").onclick=()=>{S.orders=[];S.stamps={};S.used=[];S.shop=null;clearInterval(timer);timer=null;save();render();toast("ล้างข้อมูลเดโมแล้ว")};
 $("#theme").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark";render()};
 $("#soc").value=S.soc;$("#rad").value=S.rad;
+const go=t=>$(`nav button[data-tab=${t}]`).click(),wt=ms=>new Promise(r=>setTimeout(r,ms));
+$("#logo").onclick=()=>go("home");$("#goTry").onclick=()=>go("b2c");
+$("#goDemo").onclick=async()=>{
+ S.orders=S.orders.filter(o=>!(o.mine&&o.status=="pending"));clearInterval(timer);timer=null;
+ S.si=0;S.soc=24;S.rad=300;S.tr=1;$("#soc").value=24;$("#rad").value=300;
+ const sh=SH.filter(s=>s.si==0).find(s=>fit(s,calc()).ok)||SH[1];S.shop=sh.id;
+ go("b2c");render();toast("1/4 เลือกสถานี แล้วหาร้านที่เดินไปทัน");await wt(2600);
+ const o=$("#order");if(o){o.click();toast("2/4 สั่งล่วงหน้า ได้ QR ส่วนลด")}await wt(2200);
+ const sc=$("#startC");if(sc)sc.click();toast("3/4 เริ่มชาร์จ นับถอยหลังเวลา");await wt(2600);
+ $("#myshop").value=sh.id;go("b2b");toast("4/4 ร้านค้าสแกน QR รับเงินทันที");await wt(1400);$("#scanBtn").click();await wt(3200);
+ go("pass");toast("🏅 ลูกค้าได้แสตมป์ ร้านได้ยอดขาย");
+};
+$$("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab=="home"));
 $$("#traffic button").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.v==S.tr));
 $$("#plan button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v==S.plan));
 $("#cpd").value=S.cpd;$("#pf").value=S.pf;
